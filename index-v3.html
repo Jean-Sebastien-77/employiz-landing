@@ -1,0 +1,1364 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EmployiZ | Pilotage RH et analyse DSN pour experts-comptables</title>
+<meta name="description" content="Transformez vos DSN en tableaux de bord RH. Analysez les effectifs, la masse salariale et les indicateurs sociaux de vos clients avec EmployiZ.">
+<meta property="og:title" content="EmployiZ · Vos DSN ont bien plus à vous dire">
+<meta property="og:description" content="Le pilotage social à partir de vos déclarations. Effectifs, masse salariale, absentéisme, couvertures santé et prévoyance. Par leZèbre Tech.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#010727">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000F57'/%3E%3Cpath transform='translate(8.4 7) scale(.18)' d='M0 0H84V19L31 81H84V100H0V81L53 19H0Z' fill='%23C6FF2E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..900&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"EmployiZ","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Logiciel de pilotage social et d'analyse DSN : tableaux de bord RH, masse salariale, absentéisme, turnover et couvertures santé et prévoyance, pour les experts-comptables et les entreprises.","publisher":{"@type":"Organization","name":"leZèbre Tech","url":"https://lezebre.tech"}}
+</script>
+<style>
+:root{
+  --ink:#020B47; --ink-2:#0B1763; --ink-3:#16237C;
+  --night:#010727; --navy:#000F57; --violet:#1A1040;
+  --g-night:linear-gradient(180deg,#010727 0%,#000F57 100%);
+  --g-zebre:linear-gradient(120deg,#DE1D27 0%,#FF0093 55%,#FC75B4 100%);
+  --line-d:rgba(255,255,255,.12); --line-d2:rgba(255,255,255,.2);
+  --txt-d:#F3F4FA; --mute-d:#AEB4D6;
+  --paper:#F5F4F0; --paper-2:#ECEAE4; --white:#FFFFFF;
+  --txt:#0B0E22; --mute:#555A74; --line:#DDDAD2;
+  --zest:#C6FF2E; --zest-2:#B2F000;
+  --data:#36BCD4; --data-soft:rgba(54,188,212,.14);
+  --signal:#FF0093; --signal-ink:#C8007A; --signal-soft:#FFEFF7;
+  --app-bg:#F6F5F2; --app-line:#E9E7E1; --app-txt:#12152E; --app-mute:#6B7090;
+  --r:14px; --ease:cubic-bezier(.2,.7,.1,1);
+  --pad-x:clamp(20px,4vw,48px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ink);color:var(--txt-d);font-family:Geist,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+h1,h2,h3,h4,p{margin:0}
+.mono{font-family:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:1280px;margin:0 auto;padding:0 var(--pad-x)}
+:focus-visible{outline:2px solid var(--zest);outline-offset:3px;border-radius:6px}
+.light :focus-visible{outline-color:var(--txt)}
+.skip{position:fixed;left:16px;top:-60px;z-index:100;background:var(--zest);color:var(--ink);padding:10px 16px;border-radius:8px;font-weight:600;text-decoration:none}
+.skip:focus{top:16px}
+
+/* ---------- Marque ---------- */
+.wm{display:inline-flex;align-items:baseline;font-weight:700;letter-spacing:-.045em;line-height:1;white-space:nowrap}
+.wm .z{height:.715em;width:auto;margin-left:.035em;fill:var(--zest);align-self:baseline;transform:translateY(0)}
+.zmark{fill:var(--zest)}
+
+/* ---------- Boutons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 24px;border-radius:999px;font-weight:600;font-size:16px;text-decoration:none;border:0;transition:transform .25s var(--ease),background .25s,box-shadow .25s;white-space:nowrap}
+.btn svg{width:16px;height:16px;transition:transform .3s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.btn:active{transform:scale(.98)}
+.btn-z{background:var(--zest);color:var(--ink)}
+.btn-z:hover{background:#D6FF5C;box-shadow:0 0 0 6px rgba(198,255,46,.14)}
+.btn-ghost{background:transparent;color:var(--txt-d);box-shadow:inset 0 0 0 1px var(--line-d2)}
+.btn-ghost:hover{box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
+.btn-ink{background:var(--txt);color:#fff}
+.btn-ink:hover{background:#1C2147}
+.btn-ink .dot{width:7px;height:7px;border-radius:50%;background:var(--zest)}
+
+/* ---------- Navigation ---------- */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .3s,border-color .3s}
+.nav.scrolled{background:rgba(1,8,48,.86);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line-d)}
+.nav-in{display:flex;align-items:center;height:72px;gap:32px}
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none}
+.brand .wm{font-size:25px}
+.brand small{display:inline-flex;align-items:center;gap:7px;font-size:14.5px;color:var(--mute-d);font-weight:400;letter-spacing:0}
+.lzw{display:inline-flex;align-items:center;gap:5px;color:#fff;font-weight:700;letter-spacing:-.03em;white-space:nowrap}
+.lzw svg{width:1.3em;height:1.3em;flex:none;margin-top:-2px}
+.lzw b{color:#FF0093;font-weight:700}
+.lzpill{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 16px 0 6px;border-radius:999px;background:var(--g-zebre);color:#fff;font-weight:600;font-size:14px;text-decoration:none;box-shadow:0 12px 30px -10px rgba(255,0,147,.6)}
+.lzpill span{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#fff}
+.lzpill svg{width:16px;height:16px}
+@media (max-width:420px){.brand small .t{display:none}}
+.nav-links{display:flex;gap:4px;margin-left:auto}
+.nav-links a{padding:8px 12px;border-radius:8px;font-size:14.5px;color:#C9CDE2;text-decoration:none;transition:color .2s,background .2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.nav .btn{height:42px;padding:0 18px;font-size:14.5px}
+.burger{display:none;margin-left:auto;width:44px;height:44px;border-radius:10px;border:1px solid var(--line-d2);background:transparent;align-items:center;justify-content:center}
+.burger span{display:block;width:18px;height:1.6px;background:#fff;position:relative;transition:transform .3s}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:18px;height:1.6px;background:#fff;transition:transform .3s}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.nav.open .burger span{background:transparent}
+.nav.open .burger span::before{transform:translateY(6px) rotate(45deg)}
+.nav.open .burger span::after{transform:translateY(-6px) rotate(-45deg)}
+.sheet{display:none}
+@media (max-width:980px){
+  .nav-links,.nav-in>.btn{display:none}
+  .burger{display:inline-flex}
+  .sheet{display:block;position:fixed;inset:72px 0 auto 0;background:var(--night);border-bottom:1px solid var(--line-d);padding:8px var(--pad-x) 24px;transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s}
+  .nav.open .sheet{opacity:1;transform:none;visibility:visible}
+  .nav.open{background:var(--night)}
+  .sheet a:not(.btn){display:block;padding:14px 0;border-bottom:1px solid var(--line-d);font-size:20px;font-weight:500;text-decoration:none;letter-spacing:-.02em}
+  .sheet .btn{width:100%;margin-top:20px}
+}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;padding:150px 0 0;overflow:hidden;isolation:isolate;background:var(--g-night)}
+.dsn-field{position:absolute;inset:0;z-index:-1;overflow:hidden;-webkit-mask-image:radial-gradient(110% 60% at 30% 0%,#000 20%,transparent 70%);mask-image:radial-gradient(110% 60% at 30% 0%,#000 20%,transparent 70%)}
+.dsn-cols{display:grid;grid-template-columns:repeat(6,1fr);gap:28px;padding:0 24px;font-family:"Geist Mono",monospace;font-size:11.5px;line-height:1.9;color:rgba(255,255,255,.045);white-space:nowrap;animation:drift 90s linear infinite}
+.dsn-cols div{overflow:hidden}
+.dsn-cols b{font-weight:400;color:rgba(198,255,46,.16)}
+@keyframes drift{to{transform:translateY(-50%)}}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:48px;align-items:end}
+.chip{display:inline-flex;align-items:center;gap:10px;height:32px;padding:0 14px 0 6px;border-radius:999px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px var(--line-d);font-size:13.5px;color:#D7DAEC;margin-bottom:28px}
+.chip i{display:inline-grid;place-items:center;height:22px;padding:0 8px;border-radius:999px;background:var(--zest);color:var(--ink);font-style:normal;font-weight:600;font-size:11.5px}
+.h1{font-size:clamp(48px,7.6vw,118px);font-weight:600;letter-spacing:-.055em;line-height:.92;text-wrap:balance}
+.h1 .pt{color:var(--zest)}
+.hero-side p{font-size:19px;line-height:1.5;color:#C3C7DD;max-width:440px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.reassure{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:22px;font-size:14px;color:var(--mute-d)}
+.reassure span{display:inline-flex;align-items:center;gap:8px}
+.reassure span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--zest)}
+
+.shot-wrap{position:relative;margin-top:150px;perspective:2400px;isolation:isolate}
+.shot-wrap::before{content:"";position:absolute;z-index:-1;left:calc(50% - 50vw);right:12%;top:-80px;bottom:78px;border-top-right-radius:min(26vw,380px);background:linear-gradient(165deg,#E6FF94 0%,#D4FF5C 35%,#C6FF2E 65%,#A6EB00 100%)}
+.shot-wrap::after{content:"";position:absolute;z-index:-1;right:calc(50% - 50vw);width:calc(12% + (50vw - 50%) - 48px);top:52%;bottom:78px;border-top-left-radius:min(12vw,170px);background:linear-gradient(180deg,#0B1763 0%,#16237C 100%)}
+.shot-cap{color:#C9CEE8}
+.hero-shot{position:relative;transform-origin:50% 0;transform:rotateX(calc(var(--t,0) * 16deg)) scale(calc(1 - var(--t,0) * .04));transition:transform .1s linear;will-change:transform}
+.sat{position:absolute;z-index:4;background:#fff;color:var(--app-txt);border-radius:12px;box-shadow:0 24px 60px -18px rgba(0,0,0,.55),0 0 0 1px rgba(0,0,0,.04);padding:14px 16px;font-size:13px;transition:transform .5s var(--ease)}
+.sat-up{left:-28px;top:120px;width:250px}
+.sat-sig{right:-24px;top:300px;width:300px}
+.sat .ttl{display:flex;align-items:center;gap:8px;font-weight:600;font-size:13.5px}
+.sat .sub{color:var(--app-mute);font-size:12px;margin-top:4px}
+.ok{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--zest);color:var(--ink)}
+.ok svg{width:11px;height:11px}
+.prog{height:4px;border-radius:4px;background:#EEECE6;margin-top:10px;overflow:hidden}
+.prog b{display:block;height:100%;width:100%;background:var(--ink);border-radius:4px;transform-origin:left;animation:fill 1.6s var(--ease) .9s both}
+@keyframes fill{from{transform:scaleX(0)}}
+.shot-cap{position:relative;z-index:4;text-align:center;font-size:13px;color:var(--mute-d);margin:22px 0 0}
+.facts{position:relative;z-index:4;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line-d);margin-top:64px}
+.facts div{padding:28px 28px 40px 0}
+.facts div+div{padding-left:28px;border-left:1px solid var(--line-d)}
+.facts h3{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.facts p{font-size:15px;color:var(--mute-d);margin-top:6px}
+
+/* ---------- Cockpit (interface produit) ---------- */
+.cq{container-type:inline-size}
+.app{display:grid;grid-template-columns:208px minmax(0,1fr);background:var(--app-bg);color:var(--app-txt);border-radius:16px;overflow:hidden;font-size:13px;line-height:1.35;text-align:left;box-shadow:0 50px 120px -30px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.07)}
+.light .app{box-shadow:0 40px 90px -40px rgba(11,14,34,.45),0 0 0 1px rgba(11,14,34,.08)}
+.app-main{min-width:0}
+.app-side{background:#fff;border-right:1px solid var(--app-line);padding:18px 10px}
+.app-logo{padding:2px 10px 18px;font-size:19px}
+.app-logo .wm .z{fill:#0B0E22}
+.app-logo .tag{display:inline-block;width:7px;height:7px;border-radius:2px;background:var(--zest);margin-left:6px;vertical-align:middle}
+.side-i{display:flex;align-items:center;gap:10px;height:33px;padding:0 10px;border-radius:8px;color:#50557A;font-size:12.5px;transition:background .3s,color .3s}
+.side-i svg{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.side-i.on{background:#0B0E22;color:#fff}
+.side-i.on::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--zest);margin-left:auto}
+.side-i .bd{margin-left:auto;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--signal);color:#fff;font-size:10.5px;font-weight:600;display:grid;place-items:center}
+.side-i.on .bd{display:none}
+.app-top{display:flex;align-items:center;gap:8px;height:54px;padding:0 18px;border-bottom:1px solid var(--app-line);background:#fff}
+.app-top .crumb{font-weight:600;font-size:14px;letter-spacing:-.01em;margin-right:auto}
+.sel{display:inline-flex;align-items:center;gap:7px;height:31px;padding:0 10px;border:1px solid var(--app-line);border-radius:8px;font-weight:500;font-size:12.5px;background:#fff;white-space:nowrap}
+.sel svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.6}
+.up{display:inline-flex;align-items:center;gap:7px;height:31px;padding:0 12px;border-radius:8px;background:var(--zest);color:#0B0E22;font-weight:600;font-size:12.5px;white-space:nowrap}
+.up svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.8}
+.avatar{width:31px;height:31px;border-radius:50%;background:#0B0E22;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:600}
+.app-body{padding:18px;display:grid;gap:12px;min-height:0}
+.app-body.swap{animation:swapin .45s var(--ease)}
+@keyframes swapin{from{opacity:0;transform:translateY(6px)}}
+.sec-l{font-size:11px;color:var(--app-mute);display:flex;align-items:center;gap:10px}
+.sec-l::after{content:"";flex:1;height:1px;background:var(--app-line)}
+.kgrid{display:grid;grid-template-columns:repeat(var(--kc,5),minmax(0,1fr));gap:10px}
+.kpi{position:relative;background:#fff;border:1px solid var(--app-line);border-radius:11px;padding:12px 14px 12px;min-width:0}
+.kpi .l{font-size:11.5px;color:var(--app-mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi .v{font-size:25px;font-weight:600;letter-spacing:-.035em;margin-top:6px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kpi .v small{font-size:.55em;font-weight:500;letter-spacing:0;color:var(--app-mute);margin-left:2px}
+.kpi .s{font-size:10.5px;color:#8C90A8;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi .s .up-t{color:#0E8A5F;font-weight:600}
+.kpi.sig{background:var(--signal-soft);border-color:#FFD3E8}
+.kpi.sig .v{color:var(--signal-ink)}
+.stag{display:inline-flex;align-items:center;height:17px;padding:0 7px;border-radius:9px;background:var(--signal);color:#fff;font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+.kpi .s .stag{vertical-align:middle}
+.pgrid{display:grid;grid-template-columns:var(--pc,1.7fr 1.15fr 1fr);gap:10px}
+.panel{background:#fff;border:1px solid var(--app-line);border-radius:11px;padding:14px 16px;min-width:0}
+.panel h4{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12.5px;font-weight:600;margin-bottom:10px;letter-spacing:-.005em}
+.panel h4 em{font-style:normal;font-weight:500;font-size:10.5px;color:var(--app-mute)}
+.legend{display:flex;gap:12px;font-size:10.5px;color:var(--app-mute)}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.legend i.dash{height:0;border-top:1.5px dashed #9EA2B8;border-radius:0;width:12px;vertical-align:2px}
+.ch{width:100%;min-height:40px}
+.ch svg{overflow:visible}
+.ch .gl{stroke:#EEECE6;stroke-width:1}
+.ch .ax{font-size:10px;fill:#9195AC;font-family:Geist,sans-serif}
+.ch .ln{fill:none;stroke:var(--data);stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round}
+.ch .cmp{fill:none;stroke:#A9ACC0;stroke-width:1.4;stroke-dasharray:4 4}
+.ch .dt{fill:#fff;stroke:var(--data);stroke-width:2.2}
+.ch .vl{font-size:11px;font-weight:600;fill:var(--app-txt);font-family:Geist,sans-serif}
+.anim .ln{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s var(--ease) .15s}
+.anim.drawn .ln{stroke-dashoffset:0}
+.anim .ar{opacity:0;transition:opacity .9s ease .6s}
+.anim.drawn .ar{opacity:1}
+.anim .br{transform:scaleY(0);transform-box:fill-box;transform-origin:50% 100%;transition:transform .9s var(--ease)}
+.anim.drawn .br{transform:scaleY(1)}
+.anim .dn{transition:stroke-dashoffset 1.3s var(--ease) .2s}
+.hb{display:grid;grid-template-columns:44px minmax(0,1fr) 22px 40px;align-items:center;gap:8px;font-size:11px;color:var(--app-mute);height:22px}
+.hb .tr{height:7px;border-radius:4px;background:#EFEDE7;overflow:hidden}
+.hb .tr b{display:block;height:100%;border-radius:4px;background:var(--data);width:var(--w);transition:width 1.1s var(--ease)}
+.anim:not(.drawn) .hb .tr b{width:0}
+.hb .n{font-weight:600;color:var(--app-txt);text-align:right;font-variant-numeric:tabular-nums}
+.hb .p{text-align:right;font-variant-numeric:tabular-nums}
+.dnw{display:flex;align-items:center;gap:14px}
+.dnl{display:grid;gap:7px;font-size:11.5px}
+.dnl span{display:flex;align-items:center;gap:7px;white-space:nowrap}
+.dnl i{width:8px;height:8px;border-radius:50%}
+.dnl b{font-variant-numeric:tabular-nums;margin-left:auto;padding-left:8px}
+.tbl{width:100%;border-collapse:collapse;font-size:11.5px}
+.tbl th{font-size:10.5px;font-weight:500;color:var(--app-mute);text-align:left;padding:0 6px 8px;border-bottom:1px solid var(--app-line);white-space:nowrap}
+.tbl td{padding:9px 6px;border-bottom:1px solid #F1EFEA;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl tr:last-child td{border-bottom:0;font-weight:600;background:#FAF9F6}
+.tbl .r{text-align:right}
+.pos{color:#0E8A5F;font-weight:600}
+.cov{display:inline-flex;align-items:center;gap:5px;font-size:10.5px}
+.cov i{width:7px;height:7px;border-radius:50%;background:var(--data)}
+.cov.ko{color:var(--signal-ink)} .cov.ko i{background:var(--signal)}
+.alert{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:10px;background:var(--signal-soft);border:1px solid #FFD3E8}
+.alert .ic{flex:none;width:26px;height:26px;border-radius:50%;background:#FFD6EA;color:var(--signal-ink);display:grid;place-items:center}
+.alert .ic svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.alert strong{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:12.5px}
+.alert p{font-size:11.5px;color:var(--app-mute);margin-top:3px}
+.gb{display:grid;gap:10px}
+.gb .row{display:grid;grid-template-columns:84px minmax(0,1fr);gap:10px;align-items:center;font-size:11px;color:var(--app-mute)}
+.gb .bars{display:grid;gap:4px}
+.gb .bar{display:flex;align-items:center;gap:8px}
+.gb .bar b{height:9px;border-radius:3px;width:var(--w);transition:width 1.1s var(--ease)}
+.anim:not(.drawn) .gb .bar b{width:0}
+.gb .bar span{font-variant-numeric:tabular-nums;color:var(--app-txt);font-weight:500;white-space:nowrap}
+@container (max-width:1000px){ .app{grid-template-columns:172px minmax(0,1fr)} .side-i{font-size:11.5px;gap:8px} }
+@container (max-width:720px){
+  .app{grid-template-columns:minmax(0,1fr)} .app-side{display:none}
+  .kgrid{--kc:3!important} .pgrid{--pc:1fr 1fr!important} .pgrid>.panel:first-child{grid-column:1/-1}
+  .app-top .crumb{display:none} .app-top .sel{margin-right:auto} .app-top .sel+.sel{margin-right:0}
+}
+@container (max-width:560px){
+  .app{border-radius:14px}
+  .app-top{padding:0 12px;gap:6px;height:50px} .avatar,.up .t{display:none} .up{padding:0 9px}
+  .app-body{padding:12px;gap:10px}
+  .kgrid{--kc:2!important;gap:8px} .pgrid{--pc:1fr!important;gap:8px}
+  .pgrid>.panel:first-child{grid-column:auto}
+  .kpi{padding:11px 12px} .kpi .v{font-size:22px}
+  .compact .kpi:nth-child(n+5){display:none}
+  .compact .pgrid>.panel:nth-child(n+3){display:none}
+  .tbl{font-size:11px} .tbl th,.tbl td{padding-left:4px;padding-right:4px}
+  .hide-s{display:none}
+}
+
+/* ---------- Sections génériques ---------- */
+section{position:relative}
+.light{background:var(--paper);color:var(--txt)}
+.night{background:var(--g-night)}
+.light.alt{background:var(--white)}
+.sec{padding:clamp(88px,11vw,160px) 0}
+.idx{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--mute-d);margin-bottom:26px}
+.light .idx{color:var(--mute)}
+.idx .n{font-family:"Geist Mono",monospace;font-size:12.5px;color:var(--txt-d);padding:3px 8px;border-radius:6px;box-shadow:inset 0 0 0 1px var(--line-d2)}
+.light .idx .n{color:var(--txt);box-shadow:inset 0 0 0 1px var(--line)}
+.h2{font-size:clamp(36px,4.6vw,68px);font-weight:600;letter-spacing:-.05em;line-height:.98;text-wrap:balance}
+.lead{font-size:clamp(17px,1.5vw,20px);line-height:1.55;color:var(--mute-d);max-width:620px;margin-top:22px}
+.light .lead{color:var(--mute)}
+.muted{color:var(--mute)}
+.head-split{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:48px;align-items:end;margin-bottom:64px}
+.head-split .lead{margin-top:0}
+
+/* Révélations */
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+
+/* ---------- 02 Révélation (DSN → Z → vision) ---------- */
+.story{background:linear-gradient(180deg,#000F57 0%,#020B47 55%,#010727 100%)}
+.scene{height:300vh}
+.stage{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;padding:96px 0 40px}
+.stage-head{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:48px;align-items:end;margin-bottom:clamp(28px,4vh,48px)}
+.stage-head .h2{font-size:clamp(34px,4.2vw,64px)}
+.stage-head .lead{margin:0}
+.flow{display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,.62fr) minmax(0,1fr);gap:clamp(16px,2.4vw,36px);align-items:stretch}
+.fcol h3{display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:500;color:var(--mute-d);margin-bottom:12px}
+.fcol h3 b{color:var(--txt-d);font-weight:600}
+.file{border-radius:14px;background:rgba(11,23,99,.55);box-shadow:inset 0 0 0 1px var(--line-d);padding:10px;font-family:"Geist Mono",monospace;font-size:12px}
+.blk{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:13px 10px;border-radius:9px;color:#7E84A6;transition:background .4s,color .4s}
+.blk .c{color:#9DA3C4;transition:color .4s}
+.blk .raw{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;opacity:.55}
+.blk .st{width:16px;height:16px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--line-d2);display:grid;place-items:center;transition:background .3s,box-shadow .3s}
+.blk .st svg{width:9px;height:9px;opacity:0;color:var(--ink);transition:opacity .3s}
+.blk.cur{background:rgba(198,255,46,.08);color:#E8EBF7}
+.blk.cur .c{color:var(--zest)}
+.blk.done .c{color:#E8EBF7}
+.blk.done .st{background:var(--zest);box-shadow:none}
+.blk.done .st svg{opacity:1}
+.engine{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;text-align:center}
+.zpath{width:min(100%,230px);height:auto;overflow:visible}
+.zpath .bg{fill:none;stroke:rgba(255,255,255,.07);stroke-width:19;stroke-linejoin:miter;stroke-miterlimit:10}
+.zpath .fg{fill:none;stroke:var(--zest);stroke-width:19;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--p,0))}
+.zpath .pk{fill:var(--ink);stroke:var(--zest);stroke-width:2.5}
+.steps-e{display:grid;gap:8px;font-size:13.5px;color:var(--mute-d);text-align:left}
+.steps-e span{display:flex;align-items:center;gap:10px;transition:color .3s}
+.steps-e span::before{content:"";width:7px;height:7px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--line-d2);transition:background .3s,box-shadow .3s}
+.steps-e span.on{color:var(--txt-d)}
+.steps-e span.on::before{background:var(--zest);box-shadow:none}
+.outs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.out{border-radius:12px;padding:14px 14px 13px;background:rgba(11,23,99,.55);box-shadow:inset 0 0 0 1px var(--line-d);transition:background .5s,box-shadow .5s,transform .5s var(--ease);min-width:0}
+.out .l{font-size:12px;color:#7E84A6;transition:color .4s}
+.out .v{font-size:clamp(20px,1.9vw,28px);font-weight:600;letter-spacing:-.035em;margin-top:6px;color:#4A5390;font-variant-numeric:tabular-nums;transition:color .5s;white-space:nowrap}
+.out .v small{font-size:.55em;font-weight:500;letter-spacing:0}
+.out .f{font-family:"Geist Mono",monospace;font-size:10.5px;color:#565C82;margin-top:6px}
+.out.lit{background:#fff;box-shadow:none;transform:translateY(-2px)}
+.out.lit .l{color:var(--app-mute)}
+.out.lit .v{color:var(--app-txt)}
+.out.lit .f{color:#9195AC}
+.out.lit.sg .v{color:var(--signal-ink)}
+.story-end{margin-top:22px;font-size:15px;color:var(--mute-d);display:flex;align-items:center;gap:10px;opacity:.35;transition:opacity .5s}
+.story-end.on{opacity:1}
+.story-end b{color:var(--txt-d);font-weight:600}
+@media (max-width:980px),(max-height:740px){
+  .scene{height:auto}
+  .stage{position:relative;height:auto;padding:clamp(88px,11vw,140px) 0}
+}
+@media (max-width:980px){
+  .stage-head{grid-template-columns:1fr;gap:18px}
+  .flow{grid-template-columns:1fr;gap:28px}
+  .engine{flex-direction:row;justify-content:flex-start;gap:24px}
+  .zpath{width:96px}
+}
+
+/* ---------- 03 Piliers ---------- */
+.pillars{display:grid;gap:20px}
+.pill{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,80px);align-items:center;padding:clamp(28px,4vw,56px);background:#fff;border-radius:20px;box-shadow:0 0 0 1px var(--line)}
+.pill:nth-child(2){grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
+.pill:nth-child(2) .pill-t{order:2}
+.pill .num{font-family:"Geist Mono",monospace;font-size:13px;color:var(--mute);display:flex;align-items:center;gap:12px}
+.pill .num::after{content:"";flex:1;height:1px;background:var(--line);max-width:120px}
+.pill h3{font-size:clamp(34px,3.6vw,54px);font-weight:600;letter-spacing:-.05em;line-height:1;margin-top:22px}
+.pill h3 + p{font-size:clamp(19px,1.6vw,23px);font-weight:500;letter-spacing:-.02em;margin-top:14px;color:var(--txt)}
+.pill .d{color:var(--mute);margin-top:14px;max-width:460px}
+.pill-v{background:var(--app-bg);border-radius:14px;padding:18px;box-shadow:inset 0 0 0 1px var(--app-line);color:var(--app-txt)}
+.notes{display:grid;gap:10px}
+.note{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;background:#fff;border:1px solid var(--app-line);border-radius:11px;padding:14px;font-size:14px;line-height:1.45}
+.note .k{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:#0B0E22;color:var(--zest);font-family:"Geist Mono",monospace;font-size:12px}
+.note small{display:block;color:var(--app-mute);font-size:12px;margin-top:4px}
+.v-cap{font-size:12.5px;color:var(--mute);margin-top:12px}
+
+/* ---------- 04 Produit en grand ---------- */
+.prod{display:grid;grid-template-columns:290px minmax(0,1fr);gap:clamp(24px,3.5vw,56px);align-items:start}
+.tabs{display:grid;gap:2px;position:sticky;top:110px}
+.tab{display:grid;grid-template-columns:28px 1fr;gap:4px 12px;text-align:left;background:transparent;border:0;padding:16px 16px 16px 12px;border-radius:12px;color:var(--mute);transition:background .3s,color .3s}
+.tab .tn{font-family:"Geist Mono",monospace;font-size:12px;padding-top:4px}
+.tab .tt{font-size:19px;font-weight:600;letter-spacing:-.025em;color:var(--txt);opacity:.55;transition:opacity .3s}
+.tab .td{grid-column:2;font-size:14.5px;line-height:1.5;max-height:0;overflow:hidden;opacity:0;transition:max-height .45s var(--ease),opacity .35s}
+.tab:hover .tt{opacity:.85}
+.tab[aria-selected="true"]{background:#fff;box-shadow:0 0 0 1px var(--line);color:var(--mute)}
+.tab[aria-selected="true"] .tt{opacity:1}
+.tab[aria-selected="true"] .tn{color:var(--txt)}
+.tab[aria-selected="true"] .td{max-height:140px;opacity:1}
+.tab[aria-selected="true"] .tn::after{content:"";display:block;width:6px;height:6px;border-radius:50%;background:var(--zest);box-shadow:0 0 0 1.5px var(--txt);margin-top:8px}
+.prod-cap{font-size:13px;color:var(--mute);margin-top:14px}
+.real{margin-top:clamp(64px,8vw,110px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:clamp(24px,4vw,64px);align-items:start}
+.real h3{font-size:clamp(24px,2.2vw,32px);font-weight:600;letter-spacing:-.035em;line-height:1.1}
+.real p{color:var(--mute);margin-top:12px;font-size:15.5px}
+.caps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.caps figure{margin:0;background:#fff;border-radius:12px;box-shadow:0 0 0 1px var(--line);overflow:hidden}
+.caps figure.w{grid-column:1/-1}
+.caps img{width:100%;height:auto}
+.caps figcaption{font-size:12.5px;color:var(--mute);padding:10px 14px;border-top:1px solid var(--paper-2)}
+
+/* ---------- 05 Cabinets ---------- */
+.cab{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,96px);align-items:center}
+.cab .h2{font-size:clamp(36px,4vw,60px)}
+.bens{list-style:none;padding:0;margin:44px 0 0;counter-reset:b}
+.bens li{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:22px 0;border-top:1px solid var(--line-d)}
+.bens li:last-child{border-bottom:1px solid var(--line-d)}
+.bens li::before{counter-increment:b;content:"0" counter(b);font-family:"Geist Mono",monospace;font-size:13px;color:var(--zest);padding-top:4px}
+.bens h3{font-size:20px;font-weight:600;letter-spacing:-.02em}
+.bens p{color:var(--mute-d);font-size:15.5px;margin-top:6px}
+.dossier{background:#fff;color:var(--app-txt);border-radius:18px;padding:22px;box-shadow:0 40px 100px -30px rgba(0,0,0,.65)}
+.dossier-h{display:flex;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--app-line)}
+.dossier-h .lg{width:40px;height:40px;border-radius:10px;background:#0B0E22;color:#fff;display:grid;place-items:center;font-weight:600;font-size:14px}
+.dossier-h b{display:block;font-size:15px}
+.dossier-h span{font-size:12.5px;color:var(--app-mute)}
+.dossier-h .sel{margin-left:auto}
+.dk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0}
+.dk .kpi .v{font-size:23px}
+.read{background:var(--app-bg);border-radius:12px;padding:16px}
+.read h4{font-size:12.5px;font-weight:600;margin-bottom:10px;display:flex;justify-content:space-between}
+.read h4 em{font-style:normal;color:var(--app-mute);font-weight:500}
+.read ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.read li{display:grid;grid-template-columns:8px 1fr;gap:12px;font-size:14px;line-height:1.45}
+.read li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--data);margin-top:6px}
+.read li.sg::before{background:var(--signal)}
+.read li.zz::before{background:#0B0E22}
+
+/* ---------- 06 Vision cabinet (feuille de route) ---------- */
+.road{display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px;border-radius:999px;background:var(--txt);color:#fff;font-size:13px;font-weight:500;margin-bottom:22px}
+.road i{width:7px;height:7px;border-radius:50%;background:var(--zest)}
+.porto{position:relative;margin-top:56px}
+.porto .app{grid-template-columns:minmax(0,1fr)}
+.porto .app-body{gap:14px}
+.concept{position:absolute;z-index:2;top:-14px;left:24px;display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 14px;border-radius:999px;background:var(--zest);color:var(--ink);font-size:12.5px;font-weight:600;box-shadow:0 8px 24px -8px rgba(0,0,0,.3)}
+.ptbl td:first-child{font-weight:500}
+.ptbl .co{display:flex;align-items:center;gap:10px}
+.ptbl .co i{width:26px;height:26px;border-radius:7px;background:#EDEBE5;display:grid;place-items:center;font-style:normal;font-size:10.5px;font-weight:600;color:#50557A}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters .sel.on{background:#0B0E22;color:#fff;border-color:#0B0E22}
+.road-note{margin-top:18px;font-size:14px;color:var(--mute);max-width:720px}
+
+/* ---------- 07 Comment ça marche ---------- */
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;position:relative}
+.step{background:#fff;border-radius:18px;box-shadow:0 0 0 1px var(--line);padding:26px;display:flex;flex-direction:column;min-width:0}
+.step .sn{font-family:"Geist Mono",monospace;font-size:13px;color:var(--mute)}
+.step h3{font-size:24px;font-weight:600;letter-spacing:-.035em;margin-top:14px}
+.step p{color:var(--mute);margin-top:8px;font-size:15.5px}
+.step .sv{margin-top:auto;padding-top:26px}
+.sv-box{background:var(--app-bg);border-radius:12px;padding:16px;box-shadow:inset 0 0 0 1px var(--app-line);min-height:168px;color:var(--app-txt);font-size:12.5px}
+.drop{border:1.5px dashed #C9C6BD;border-radius:10px;padding:14px;text-align:center;color:var(--app-mute)}
+.files{display:grid;gap:6px;margin-top:10px}
+.fl{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--app-line);border-radius:8px;padding:7px 10px;font-family:"Geist Mono",monospace;font-size:11.5px;transform:translateY(8px);opacity:0;transition:all .5s var(--ease)}
+.fl .ext{margin-left:auto;font-size:10px;padding:2px 6px;border-radius:5px;background:#EFEDE7;color:#50557A}
+.played .fl{transform:none;opacity:1}
+.played .fl:nth-child(2){transition-delay:.15s}.played .fl:nth-child(3){transition-delay:.3s}
+.pipe{display:grid;gap:12px}
+.pp{display:grid;grid-template-columns:20px 1fr auto;gap:10px;align-items:center}
+.pp .ok{background:#E6E4DE;color:transparent;transition:background .3s,color .3s}
+.played .pp .ok{background:var(--zest);color:var(--ink)}
+.played .pp:nth-child(2) .ok{transition-delay:.5s}.played .pp:nth-child(3) .ok{transition-delay:1s}
+.pp .bar{grid-column:2/4;height:4px;border-radius:4px;background:#E6E4DE;overflow:hidden}
+.pp .bar b{display:block;height:100%;background:#0B0E22;transform:scaleX(0);transform-origin:left;transition:transform .8s var(--ease)}
+.played .pp .bar b{transform:scaleX(1)}
+.played .pp:nth-child(2) .bar b{transition-delay:.45s}.played .pp:nth-child(3) .bar b{transition-delay:.95s}
+.pp small{color:var(--app-mute)}
+.mini-k{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mini-k .kpi{padding:10px 12px}.mini-k .kpi .v{font-size:20px}
+.cmp-sw{display:inline-flex;margin-top:10px;background:#fff;border:1px solid var(--app-line);border-radius:8px;padding:3px;gap:2px;font-size:11.5px}
+.cmp-sw span{padding:4px 10px;border-radius:6px;color:var(--app-mute)}
+.cmp-sw span.on{background:#0B0E22;color:#fff}
+.how-note{margin-top:22px;font-size:14px;color:var(--mute)}
+
+/* ---------- 08 Sécurité ---------- */
+.trust{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line-d);margin-top:64px}
+.trust div{padding:28px 24px 8px 0;min-width:0}
+.trust div+div{padding-left:24px;border-left:1px solid var(--line-d)}
+.trust svg{width:28px;height:28px;fill:none;stroke:var(--zest);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.trust h3{font-size:18px;font-weight:600;letter-spacing:-.02em;margin-top:20px}
+.trust p{font-size:15px;color:var(--mute-d);margin-top:8px}
+.group{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(32px,5vw,80px);align-items:center}
+.vid-st{position:relative;isolation:isolate;padding:130px 0 64px 10%}
+.vid-st::before{content:"";position:absolute;z-index:-1;left:calc(var(--pad-x) * -1 - (100vw - min(100vw,1280px)) / 2);right:26%;top:0;bottom:0;border-top-right-radius:min(18vw,260px);background:linear-gradient(170deg,#FAB0D7 0%,#F98FA6 42%,#F26A4B 82%,#EE5A3C 100%)}
+.vid{position:relative;margin:0;border-radius:22px;overflow:hidden;aspect-ratio:16/10;background:#0A1250;box-shadow:0 0 0 1px var(--line-d),0 40px 100px -30px rgba(0,0,0,.7)}
+.vid video,.vid img{width:100%;height:100%;object-fit:cover;display:block}
+.vid .lzpill{position:absolute;left:18px;bottom:18px}
+.vid .pp-btn{position:absolute;right:16px;bottom:16px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(1,7,39,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fff;display:grid;place-items:center}
+.vid .pp-btn svg{width:14px;height:14px;fill:currentColor}
+.vid figcaption{position:absolute;right:68px;bottom:26px;font-size:12px;color:rgba(255,255,255,.85);text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.group .lead{margin-top:20px}
+.gpts{list-style:none;padding:0;margin:32px 0 0;display:grid;gap:0}
+.gpts li{display:grid;grid-template-columns:20px 1fr;gap:14px;padding:16px 0;border-top:1px solid var(--line-d)}
+.gpts li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--g-zebre);margin-top:8px}
+.gpts b{display:block;font-weight:600;font-size:17px;letter-spacing:-.01em}
+.gpts span{color:var(--mute-d);font-size:15px}
+.group .ctas{margin-top:28px}
+@media (max-width:980px){.group{grid-template-columns:1fr}.vid figcaption{display:none}.vid-st{padding:90px 0 36px 8%}.vid-st::before{right:22%;border-top-right-radius:120px}}
+.rgpd{margin-top:48px;padding:20px 24px;border-radius:14px;box-shadow:inset 0 0 0 1px var(--line-d);display:flex;gap:16px;align-items:center;font-size:15.5px;color:#C9CDE2}
+.rgpd b{color:#fff;font-weight:600}
+
+/* ---------- FAQ ---------- */
+.faq{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,96px)}
+.qa{border-top:1px solid var(--line)}
+.qa details{border-bottom:1px solid var(--line)}
+.qa summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px 0;font-size:clamp(17px,1.5vw,20px);font-weight:600;letter-spacing:-.02em;cursor:pointer}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary .pl{flex:none;width:30px;height:30px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--line);display:grid;place-items:center;transition:transform .35s var(--ease),background .3s}
+.qa summary .pl svg{width:12px;height:12px;stroke:currentColor;stroke-width:1.8}
+.qa details[open] summary .pl{transform:rotate(45deg);background:var(--zest);box-shadow:none}
+.qa .ans{padding:0 56px 26px 0;color:var(--mute);font-size:16px}
+
+/* ---------- 09 Conversion ---------- */
+.final{overflow:hidden;isolation:isolate;background:linear-gradient(180deg,#000F57 0%,#010727 100%)}
+.bigz{position:absolute;z-index:-1;right:max(-4vw,-60px);top:50%;width:min(44vw,600px);transform:translateY(-50%);fill:url(#zfade)}
+.final-g{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(32px,5vw,80px);align-items:center}
+.final .h2{font-size:clamp(38px,5.4vw,84px)}
+.form{background:rgba(1,7,39,.92);border-radius:22px;padding:clamp(24px,3vw,40px);box-shadow:0 0 0 1px var(--line-d2),0 40px 100px -30px rgba(0,0,0,.8)}
+.form h3{font-size:22px;font-weight:600;letter-spacing:-.025em}
+.form > p{font-size:15px;color:var(--mute-d);margin-top:6px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+.fld{display:grid;gap:7px;min-width:0}
+.fld.full{grid-column:1/-1}
+.fld label{font-size:13.5px;color:#C9CDE2}
+.fld label small{color:var(--mute-d)}
+.fld input{height:50px;border-radius:12px;border:0;background:#0A1250;box-shadow:inset 0 0 0 1px var(--line-d2);color:#fff;font:inherit;font-size:16px;padding:0 16px;transition:box-shadow .2s}
+.fld input::placeholder{color:#6E7498}
+.fld input:focus{outline:0;box-shadow:inset 0 0 0 1.5px var(--zest)}
+.fld.err input{box-shadow:inset 0 0 0 1.5px #FF6BB5}
+.fld .em{font-size:12.5px;color:#FF8BC4;min-height:0}
+.form .btn{width:100%;margin-top:20px;height:56px}
+.fnote{font-size:12.5px;color:var(--mute-d);margin-top:14px}
+.fstate{display:none;margin-top:16px;padding:14px 16px;border-radius:12px;background:rgba(198,255,46,.08);box-shadow:inset 0 0 0 1px rgba(198,255,46,.35);font-size:14.5px;color:#E8EBF7}
+.fstate.on{display:block}
+.fstate a{color:var(--zest)}
+
+/* ---------- Footer ---------- */
+footer{position:relative;padding:64px 0 36px;background:var(--night)}
+footer::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;background:linear-gradient(90deg,rgba(198,255,46,0) 0%,var(--zest) 50%,rgba(198,255,46,0) 100%)}
+.foot{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:32px}
+.foot .wm{font-size:30px}
+.lock{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.byz{font-size:16px;font-weight:500;color:var(--mute-d);letter-spacing:-.01em}
+.foot .by{display:flex;align-items:center;gap:10px;margin-top:14px;color:var(--mute-d);font-size:14px}
+.foot .by img{height:30px;width:auto}
+.foot h4{font-size:13.5px;font-weight:500;color:var(--mute-d);margin-bottom:14px}
+.foot ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.foot a{text-decoration:none;font-size:15px;color:#DADDEE}
+.foot a:hover{color:var(--zest)}
+.legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:56px;padding-top:24px;border-top:1px solid var(--line-d);font-size:13px;color:var(--mute-d)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1180px){
+  .sat-up{left:8px} .sat-sig{right:8px}
+  .trust{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .trust div:nth-child(4){padding-left:0;border-left:0}
+  .trust div:nth-child(n+4){border-top:1px solid var(--line-d)}
+}
+@media (max-width:980px){
+  .hero{padding-top:118px}
+  .shot-wrap{margin-top:110px}
+  .hero-grid,.head-split,.cab,.faq,.final-g,.real{grid-template-columns:1fr;gap:28px}
+  .head-split{margin-bottom:44px}
+  .hero-side p{max-width:none}
+  .shot-wrap{margin-top:48px}
+  .facts{grid-template-columns:1fr}
+  .facts div,.facts div+div{padding:20px 0;border-left:0;border-top:1px solid var(--line-d)}
+  .facts div:first-child{border-top:0}
+  .pill,.pill:nth-child(2){grid-template-columns:1fr}
+  .pill:nth-child(2) .pill-t{order:0}
+  .prod{grid-template-columns:1fr}
+  .tabs{position:relative;top:0;display:flex;overflow-x:auto;gap:8px;margin:0 calc(var(--pad-x) * -1);padding:4px var(--pad-x) 8px;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:none;display:flex;gap:8px;align-items:center;padding:0 16px;height:44px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);scroll-snap-align:start}
+  .tab .tt{font-size:15px;opacity:1;color:var(--mute)}
+  .tab .td,.tab .tn{display:none}
+  .tab[aria-selected="true"]{background:var(--txt);box-shadow:none}
+  .tab[aria-selected="true"] .tt{color:#fff}
+  .tab-desc{display:block!important}
+  .how{grid-template-columns:1fr}
+  .trust{grid-template-columns:1fr 1fr}
+  .trust div,.trust div+div{padding:24px 16px 20px 0;border-left:0;border-top:1px solid var(--line-d)}
+  .trust div:nth-child(-n+2){border-top:0}
+  .bigz{right:-30vw;top:auto;bottom:-6vw;transform:none;width:90vw;opacity:.9}
+  .foot{grid-template-columns:1fr 1fr}
+  .foot>div:first-child{grid-column:1/-1}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  .shot-wrap{margin-top:96px}
+  .shot-wrap::before{right:8%;top:-48px;bottom:150px;border-top-right-radius:120px}
+  .shot-wrap::after{display:none}
+  .dsn-cols{grid-template-columns:repeat(2,1fr);font-size:10.5px}
+  .dsn-cols div:nth-child(n+3){display:none}
+  .sat-up{display:none}
+  .sat-sig{position:relative;right:auto;top:auto;width:auto;margin:-64px 14px 0;z-index:5}
+  .ctas .btn{flex:1 1 100%}
+  .dk{grid-template-columns:1fr 1fr}.dk .kpi:last-child{grid-column:1/-1}
+  .fields{grid-template-columns:1fr}
+  .trust{grid-template-columns:1fr}
+  .trust div:nth-child(2){border-top:1px solid var(--line-d)}
+  .rgpd{flex-direction:column;align-items:flex-start}
+  .qa .ans{padding-right:0}
+  .concept{left:12px}
+  .dossier{padding:16px}
+  .dossier-h .sel{display:none}
+  .pill{padding:22px;border-radius:16px}
+  .pill-v{padding:12px}
+}
+.tab-desc{display:none;color:var(--mute);font-size:15px;margin:4px 0 16px}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .hero-shot{transform:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+
+<!-- Glyphe Z partagé : dessiné, pas tiré d'une police -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="z" viewBox="0 0 84 100"><path d="M0 0H84V19L31 81H84V100H0V81L53 19H0Z"/></symbol>
+  <defs><linearGradient id="lzgrad" x1="1.028" y1="-0.558" x2="0.718" y2="0.803" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#de1d27"/>
+      <stop offset="1" stop-color="#ff0093"/>
+    </linearGradient>
+    <clipPath id="lzclip">
+      <rect id="Rectangle_8" data-name="Rectangle 8" width="49.566" height="51.294" fill="url(#lzgrad)"/>
+    </clipPath></defs>
+  <symbol id="zb" viewBox="0 0 56.98 58.417"><g transform="translate(8.024) rotate(9)">
+    <g clip-path="url(#lzclip)">
+      <path d="M23.443,29.906a13.019,13.019,0,0,0-4.412-6.935c-2.121-1.916-4.589-3.484-6.86-5.252A43.226,43.226,0,0,1,6.03,11.9,16.867,16.867,0,0,1,2.541,6.281,7.356,7.356,0,0,1,3.131,0,16.178,16.178,0,0,0,.124,6c-.7,3.865,1.676,7.722,4.845,10.392s7.1,4.462,10.687,6.654,7.012,5,8.316,8.735" transform="translate(0 19.517)" fill="url(#lzgrad)"/>
+      <path d="M18.145,43.734c.84-3.419-.578-8.852-2.254-12.009-1.977-3.724-5.473-6.587-9.015-9.2C4.017,20.422.867,18.128.149,14.857A9.1,9.1,0,0,1,1.673,8.268C3.668,5.029,6.767,2.483,9.811,0A34.49,34.49,0,0,0,6.442,7.577a11.15,11.15,0,0,0,.6,8.011c1.572,3,4.786,4.966,7.158,7.5a16.94,16.94,0,0,1,3.8,6.43,26.4,26.4,0,0,1,.977,5.265c.2,1.867.121,7.29-.836,8.954" transform="translate(5.828 7.56)" fill="url(#lzgrad)"/>
+      <path d="M7.7,51.294c.583-3.844,1.443-18.3-.186-21.888a31.173,31.173,0,0,0-3.886-5.6C1.357,20.809-.361,17.274.065,13.666A17.843,17.843,0,0,1,8.7,0C5.033,3.755,2.234,10.48,2.167,14.909s5.062,7.153,8.557,10.257a3.084,3.084,0,0,1,1.041,1.264,2.194,2.194,0,0,1-.032,1.1c-.831,3.8.5,16.707-4.035,23.767" transform="translate(16.275 0)" fill="url(#lzgrad)"/>
+      <path d="M7.46,15.387C15.81,8.841,7.587.1,6.741.024,4.435-.172,2.039.818,0,3.374,1.187,4.512,8.708,8.562,5.883,14.511c-.489,1.029.511,1.711,1.577.876" transform="translate(26.842 8.535)" fill="url(#lzgrad)"/>
+      <path d="M2.872.278C2.336-.18,1.149-.07,1.169.6a16.732,16.732,0,0,1-.107,4.552C.645,6.605-.2,7.816.043,9.308a3.187,3.187,0,0,0,.647,1.6,4.313,4.313,0,0,0,1.178.867q1.484.842,3.044,1.565A1.455,1.455,0,0,0,6.8,12.792,31.258,31.258,0,0,0,8.789,8.162,3.253,3.253,0,0,0,9.031,6.7a3.49,3.49,0,0,0-.8-1.553A49.561,49.561,0,0,0,2.872.278" transform="translate(40.518 18.173)" fill="url(#lzgrad)"/>
+    </g>
+  </g></symbol>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="EmployiZ, accueil">
+      <span class="wm">Employi<svg class="z" viewBox="0 0 84 100" aria-hidden="true"><use href="#z"/></svg></span>
+    </a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="#solution">La solution</a>
+      <a href="#fonctionnalites">Fonctionnalités</a>
+      <a href="#cabinets">Pour les cabinets</a>
+      <a href="#fonctionnement">Comment ça marche</a>
+    </nav>
+    <a class="btn btn-z" href="#demo">Demander une démo</a>
+    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sheet"><span></span></button>
+  </div>
+  <div class="sheet" id="sheet">
+    <a href="#solution">La solution</a>
+    <a href="#fonctionnalites">Fonctionnalités</a>
+    <a href="#cabinets">Pour les cabinets</a>
+    <a href="#fonctionnement">Comment ça marche</a>
+    <a class="btn btn-z" href="#demo">Demander une démo</a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- 01 HERO -->
+<section class="hero" id="top">
+  <div class="dsn-field" aria-hidden="true"><div class="dsn-cols" id="dsnCols"></div></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="rv">
+        <div class="chip"><i>Nouveau</i>Le pilotage social nouvelle génération</div>
+        <h1 class="h1">Vos DSN ont bien plus à vous dire<span class="pt">.</span></h1>
+      </div>
+      <div class="hero-side rv" style="--d:.12s">
+        <p>Transformez les données sociales de vos clients en indicateurs clairs, en analyses utiles et en nouvelles occasions de conseil.</p>
+        <div class="ctas">
+          <a class="btn btn-z" href="#demo">Demander une démo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+          <a class="btn btn-ghost" href="#fonctionnalites">Découvrir la plateforme</a>
+        </div>
+        <div class="reassure"><span>Sans ressaisie</span><span>Sans changer de logiciel de paie</span></div>
+      </div>
+    </div>
+
+    <figure class="shot-wrap" style="margin-left:0;margin-right:0">
+      <div class="hero-shot" id="heroShot">
+        <div class="cq rv" style="--d:.25s"><div id="heroApp" class="compact" aria-hidden="true"></div></div>
+        <div class="sat sat-up rv" style="--d:.9s" aria-hidden="true">
+          <div class="ttl"><span class="ok"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></span>DSN d'octobre intégrée</div>
+          <div class="sub">47 salariés · indicateurs actualisés</div>
+          <div class="prog"><b></b></div>
+        </div>
+        <div class="sat sat-sig rv" style="--d:1.2s" aria-hidden="true">
+          <div class="alert" style="padding:0;background:none;border:0">
+            <span class="ic"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.2"/><path d="M8 5v3.4M8 11v.1"/></svg></span>
+            <div><strong>Couverture santé incomplète <span class="stag">Signal leZèbre</span></strong><p>91,5 % des salariés couverts, sous le seuil de 95 %.</p></div>
+          </div>
+        </div>
+      </div>
+      <figcaption class="shot-cap">Interface EmployiZ transposée du produit actuel. Société et données fictives.</figcaption>
+    </figure>
+
+    <div class="facts">
+      <div class="rv"><h3>Une source unique</h3><p>La DSN : la donnée sociale normée, exhaustive et déjà produite chaque mois.</p></div>
+      <div class="rv" style="--d:.08s"><h3>Aucune ressaisie</h3><p>Formats EDI, XML et DSN acceptés, quel que soit votre éditeur de paie.</p></div>
+      <div class="rv" style="--d:.16s"><h3>Hébergement en France</h3><p>Données chiffrées, cloisonnées par client, accès tracés.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 LA RÉVÉLATION -->
+<section class="story" id="solution" aria-labelledby="t-story">
+  <div class="scene" id="scene">
+    <div class="stage">
+      <div class="wrap">
+        <div class="stage-head">
+          <div>
+            <div class="idx"><span class="n">02</span>La révélation</div>
+            <h2 class="h2" id="t-story">Chaque mois, vos DSN racontent une histoire.</h2>
+          </div>
+          <p class="lead">Effectifs, rémunérations, absences, couvertures santé et prévoyance : tout est déjà déclaré. EmployiZ lit chaque déclaration et lui donne enfin du sens.</p>
+        </div>
+        <div class="flow" id="flow">
+          <div class="fcol">
+            <h3><b>Fichier DSN</b><span class="mono">DSN_2026-10.dsn</span></h3>
+            <div class="file" id="blocks"></div>
+          </div>
+          <div class="fcol engine" aria-hidden="true">
+            <svg class="zpath" viewBox="-6 -6 96 112">
+              <path class="bg" d="M0 9.5H66L18 90.5H84" />
+              <path class="fg" id="zfg" pathLength="1" d="M0 9.5H66L18 90.5H84" />
+              <circle class="pk" id="zpk" r="5" cx="0" cy="9.5"/>
+            </svg>
+            <div class="steps-e" id="esteps"><span>Lecture</span><span>Normalisation</span><span>Historisation</span></div>
+          </div>
+          <div class="fcol">
+            <h3><b>Vision claire</b><span>Octobre 2026</span></h3>
+            <div class="outs" id="outs"></div>
+          </div>
+        </div>
+        <p class="story-end" id="storyEnd"><span class="ok"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></span><span><b>Une déclaration déposée.</b> Des indicateurs prêts à commenter, sans tableur.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 TROIS PILIERS -->
+<section class="light sec" aria-labelledby="t-pil">
+  <div class="wrap">
+    <div class="head-split">
+      <div class="rv"><div class="idx"><span class="n">03</span>Ce que vous en faites</div><h2 class="h2" id="t-pil">Visualisez. Comprenez. Conseillez.</h2></div>
+      <p class="lead rv" style="--d:.1s">Trois gestes, une même donnée. Celle que vos clients déclarent déjà, chaque mois.</p>
+    </div>
+    <div class="pillars">
+      <article class="pill rv">
+        <div class="pill-t">
+          <div class="num">01</div>
+          <h3>Visualisez</h3>
+          <p>Tous vos indicateurs sociaux, enfin réunis.</p>
+          <p class="d">Effectifs, masse salariale, rémunérations, absences et mouvements de personnel, calculés à chaque dépôt et lisibles d'un coup d'œil.</p>
+        </div>
+        <div class="pill-v cq" aria-hidden="true">
+          <div class="kgrid" style="--kc:3" id="pilK"></div>
+        </div>
+      </article>
+      <article class="pill rv">
+        <div class="pill-t">
+          <div class="num">02</div>
+          <h3>Comprenez</h3>
+          <p>Repérez les évolutions qui comptent.</p>
+          <p class="d">Chaque indicateur est confronté au mois et à l'année précédents. Les couvertures santé et prévoyance sont relues et les écarts remontent en signal.</p>
+        </div>
+        <div class="pill-v" aria-hidden="true">
+          <div class="panel" style="margin-bottom:10px">
+            <h4>Masse salariale brute mensuelle <span class="legend"><span><i style="background:var(--data)"></i>2026</span><span><i class="dash"></i>N-1</span></span></h4>
+            <div class="ch anim" data-ch="masseLine" data-h="150"></div>
+          </div>
+          <div class="alert"><span class="ic"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.2"/><path d="M8 5v3.4M8 11v.1"/></svg></span><div><strong>Couverture santé incomplète <span class="stag">Signal leZèbre</span></strong><p>Non-cadres : 34 salariés couverts sur 38, sous le seuil de 95 %.</p></div></div>
+        </div>
+      </article>
+      <article class="pill rv">
+        <div class="pill-t">
+          <div class="num">03</div>
+          <h3>Conseillez</h3>
+          <p>Transformez vos analyses en échanges à forte valeur ajoutée.</p>
+          <p class="d">Vous arrivez en rendez-vous avec des chiffres qui font foi, ceux de la paie et des déclarations, et des sujets concrets à ouvrir avec le dirigeant.</p>
+        </div>
+        <div>
+          <div class="pill-v" aria-hidden="true">
+            <div class="notes">
+              <div class="note"><span class="k">1</span><div>« Votre effectif a progressé de 5 personnes en un an. »<small>Effectifs · 42 → 47 salariés</small></div></div>
+              <div class="note"><span class="k">2</span><div>« L'absentéisme remonte depuis l'été. Parlons-en. »<small>Absentéisme · 2,4 % en juillet, 4,2 % en octobre</small></div></div>
+              <div class="note"><span class="k">3</span><div>« Quatre salariés ne sont pas couverts en santé. »<small>Couvertures · Signal leZèbre</small></div></div>
+            </div>
+          </div>
+          <p class="v-cap">Mise en situation : vos notes de préparation, construites à partir des indicateurs.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 04 LE PRODUIT EN GRAND -->
+<section class="light alt sec" id="fonctionnalites" aria-labelledby="t-prod">
+  <div class="wrap">
+    <div class="head-split">
+      <div class="rv"><div class="idx"><span class="n">04</span>Fonctionnalités</div><h2 class="h2" id="t-prod">Toute l'intelligence sociale. Dans un seul cockpit.</h2></div>
+      <p class="lead rv" style="--d:.1s">Des indicateurs calculés automatiquement à partir des déclarations et actualisés à chaque dépôt. Sans mise en forme préalable.</p>
+    </div>
+    <div class="prod">
+      <div class="tabs" role="tablist" aria-label="Modules EmployiZ" id="tabs"></div>
+      <div>
+        <p class="tab-desc" id="tabDesc"></p>
+        <div class="cq rv" role="tabpanel" id="prodPanel" aria-live="polite"><div id="prodApp"></div></div>
+        <p class="prod-cap">Interface transposée du produit actuel. Société et données fictives.</p>
+      </div>
+    </div>
+
+    <div class="real">
+      <div class="rv">
+        <h3>Le produit existe. Voici ses écrans aujourd'hui.</h3>
+        <p>Captures de l'application actuelle, publiée sous le nom RH BI, sur un dossier de démonstration. EmployiZ en reprend les modules, les calculs et le Signal leZèbre, dans une identité nouvelle.</p>
+      </div>
+      <div class="caps rv" style="--d:.1s">
+        <figure class="w"><img src="assets/rhbi-dashboard.png" width="1600" height="594" loading="lazy" alt="Accueil de l'application actuelle : indicateurs de synthèse du mois, dont effectif, masse salariale brute, absentéisme et couvertures santé et prévoyance."><figcaption>Synthèse du mois · application actuelle</figcaption></figure>
+        <figure><img src="assets/rhbi-coverage-state.png" width="728" height="298" loading="lazy" alt="Tableau de l'état des couvertures santé et prévoyance par population, cadres et non-cadres."><figcaption>État des couvertures par population</figcaption></figure>
+        <figure><img src="assets/rhbi-salary-by-category.png" width="728" height="212" loading="lazy" alt="Tableau du salaire moyen et médian par catégorie avec variation sur un an."><figcaption>Salaire moyen et médian par catégorie</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 BÉNÉFICE EXPERT-COMPTABLE -->
+<section class="sec night" id="cabinets" aria-labelledby="t-cab">
+  <div class="wrap cab">
+    <div>
+      <div class="rv"><div class="idx"><span class="n">05</span>Pour les cabinets</div>
+      <h2 class="h2" id="t-cab">Vos clients attendent plus que des bulletins de paie.</h2>
+      <p class="lead">Donnez-leur une vision claire de leur entreprise. Vous détenez déjà la donnée sociale de vos dossiers : EmployiZ en fait la matière d'un vrai rendez-vous de conseil.</p></div>
+      <ul class="bens">
+        <li class="rv"><div><h3>Préparez vos rendez-vous avec des données utiles.</h3><p>Des chiffres à commenter, disponibles sans retraitement, dossier par dossier.</p></div></li>
+        <li class="rv" style="--d:.06s"><div><h3>Valorisez les informations que vous détenez déjà.</h3><p>Les DSN que vous produisez cessent d'être une simple formalité déclarative.</p></div></li>
+        <li class="rv" style="--d:.12s"><div><h3>Identifiez de nouveaux sujets de conseil.</h3><p>Masse salariale, absentéisme, couvertures santé et prévoyance : les évolutions se repèrent d'elles-mêmes.</p></div></li>
+        <li class="rv" style="--d:.18s"><div><h3>Renforcez durablement la relation client.</h3><p>Le cabinet et son client regardent la même donnée, celle qui fait foi.</p></div></li>
+      </ul>
+      <div class="ctas rv"><a class="btn btn-z" href="#demo">Demander une démo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div>
+    </div>
+    <div class="dossier rv" style="--d:.15s" aria-hidden="true">
+      <div class="dossier-h">
+        <span class="lg">SD</span>
+        <div><b>Société démo</b><span>Dossier client · 47 salariés · DSN d'octobre</span></div>
+        <span class="sel">Comparer à N-1 <svg viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3"/></svg></span>
+      </div>
+      <div class="dk">
+        <div class="kpi"><div class="l">Effectif</div><div class="v">47</div><div class="s"><span class="up-t">+5</span> sur un an</div></div>
+        <div class="kpi"><div class="l">Masse salariale</div><div class="v">162,5<small>k€</small></div><div class="s"><span class="up-t">+6,4 %</span> sur un an</div></div>
+        <div class="kpi sig"><div class="l">Couverture santé</div><div class="v">91,5<small>%</small></div><div class="s">seuil 95 %</div></div>
+      </div>
+      <div class="read">
+        <h4>Lecture pour le dirigeant <em>Mise en situation</em></h4>
+        <ul>
+          <li>Votre entreprise a recruté 10 personnes et en a vu partir 5 en douze mois.</li>
+          <li class="zz">La masse salariale progresse plus vite que l'effectif : salaire moyen à 3 457 €.</li>
+          <li class="sg">Quatre salariés non-cadres n'apparaissent pas affiliés à la mutuelle.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 VISION CABINET (FEUILLE DE ROUTE) -->
+<section class="light sec" aria-labelledby="t-port">
+  <div class="wrap">
+    <div class="head-split" style="margin-bottom:0">
+      <div class="rv"><span class="road"><i></i>Feuille de route</span><h2 class="h2" id="t-port">Tous vos clients. Une seule vision.</h2></div>
+      <p class="lead rv" style="--d:.1s">Aujourd'hui, chaque dossier est suivi dans son propre espace. Demain, la vue consolidée de portefeuille et la gestion des droits par collaborateur vous donneront une lecture d'ensemble de vos clients.</p>
+    </div>
+    <div class="porto cq rv" aria-hidden="true">
+      <span class="concept">Aperçu conceptuel · non disponible à ce jour</span>
+      <div class="app">
+        <div class="app-main">
+          <div class="app-top"><span class="crumb">Portefeuille du cabinet</span><span class="sel">Tous les collaborateurs <svg viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3"/></svg></span><span class="sel">Octobre 2026 <svg viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3"/></svg></span></div>
+          <div class="app-body">
+            <div class="kgrid" style="--kc:4">
+              <div class="kpi"><div class="l">Dossiers suivis</div><div class="v">64</div><div class="s">DSN d'octobre reçues : 61</div></div>
+              <div class="kpi"><div class="l">Effectif consolidé</div><div class="v">1 284</div><div class="s"><span class="up-t">+3,1 %</span> sur un an</div></div>
+              <div class="kpi"><div class="l">Masse salariale globale</div><div class="v">4,21<small>M€</small></div><div class="s">mensuelle brute</div></div>
+              <div class="kpi sig"><div class="l">Dossiers à examiner</div><div class="v">7</div><div class="s">signaux de couverture</div></div>
+            </div>
+            <div class="filters"><span class="sel on">Tous</span><span class="sel">Avec signal</span><span class="sel">Effectif en hausse</span><span class="sel">Absentéisme en hausse</span></div>
+            <div class="panel" style="padding:6px 12px 2px;overflow-x:auto">
+              <table class="tbl ptbl">
+                <thead><tr><th>Dossier</th><th class="r">Effectif</th><th class="r hide-s">Masse salariale</th><th class="r">Var. N-1</th><th class="r hide-s">Absentéisme</th><th>Couvertures</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="co"><i>SD</i>Société démo</span></td><td class="r">47</td><td class="r hide-s">162 480 €</td><td class="r pos">+6,4 %</td><td class="r hide-s">4,2 %</td><td><span class="cov ko"><i></i>Santé 91,5 %</span></td></tr>
+                  <tr><td><span class="co"><i>DA</i>Dossier A</span></td><td class="r">112</td><td class="r hide-s">371 900 €</td><td class="r pos">+2,8 %</td><td class="r hide-s">3,6 %</td><td><span class="cov"><i></i>Complètes</span></td></tr>
+                  <tr><td><span class="co"><i>DB</i>Dossier B</span></td><td class="r">18</td><td class="r hide-s">51 300 €</td><td class="r">-1,2 %</td><td class="r hide-s">5,9 %</td><td><span class="cov"><i></i>Complètes</span></td></tr>
+                  <tr><td><span class="co"><i>DC</i>Dossier C</span></td><td class="r">263</td><td class="r hide-s">902 400 €</td><td class="r pos">+4,1 %</td><td class="r hide-s">4,8 %</td><td><span class="cov ko"><i></i>Prévoyance 93 %</span></td></tr>
+                  <tr><td>Total portefeuille</td><td class="r">1 284</td><td class="r hide-s">4,21 M€</td><td class="r pos">+3,4 %</td><td class="r hide-s">4,3 %</td><td>7 signaux</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="road-note rv">Nous présentons ce que le produit fait aujourd'hui, et nous signalons clairement ce qu'il fera demain. Les exports et l'automatisation des dépôts suivent le même chemin.</p>
+  </div>
+</section>
+
+<!-- 07 COMMENT ÇA MARCHE -->
+<section class="light alt sec" id="fonctionnement" aria-labelledby="t-how">
+  <div class="wrap">
+    <div class="head-split">
+      <div class="rv"><div class="idx"><span class="n">07</span>Comment ça marche</div><h2 class="h2" id="t-how">De la DSN à la décision. En toute simplicité.</h2></div>
+      <p class="lead rv" style="--d:.1s">EmployiZ se place en aval de la paie. Aucun projet de migration, aucune double saisie, aucune interruption de votre production mensuelle.</p>
+    </div>
+    <div class="how" id="how">
+      <article class="step rv">
+        <span class="sn">01</span><h3>Importez vos DSN</h3>
+        <p>Utilisez les fichiers générés par votre logiciel de paie ou votre prestataire. Une déclaration à la fois ou par lots.</p>
+        <div class="sv" aria-hidden="true"><div class="sv-box">
+          <div class="drop">Déposez vos fichiers ici</div>
+          <div class="files"><span class="fl">DSN_2026-10<span class="ext">.dsn</span></span><span class="fl">DSN_2026-09<span class="ext">.xml</span></span><span class="fl">DSN_2026-08<span class="ext">.edi</span></span></div>
+        </div></div>
+      </article>
+      <article class="step rv" style="--d:.08s">
+        <span class="sn">02</span><h3>Retrouvez vos indicateurs</h3>
+        <p>Les déclarations sont lues, normalisées et conservées. Les indicateurs sont calculés, l'historique se constitue au fil des dépôts.</p>
+        <div class="sv" aria-hidden="true"><div class="sv-box pipe">
+          <div class="pp"><span class="ok"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></span><span>Lecture</span><small>3 fichiers</small><span class="bar"><b></b></span></div>
+          <div class="pp"><span class="ok"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></span><span>Normalisation</span><small>47 salariés</small><span class="bar"><b></b></span></div>
+          <div class="pp"><span class="ok"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></span><span>Historisation</span><small>août à octobre</small><span class="bar"><b></b></span></div>
+        </div></div>
+      </article>
+      <article class="step rv" style="--d:.16s">
+        <span class="sn">03</span><h3>Passez à l'analyse</h3>
+        <p>Explorez les évolutions sociales et préparez vos échanges, avec la comparaison au mois et à l'année précédents.</p>
+        <div class="sv" aria-hidden="true"><div class="sv-box">
+          <div class="mini-k"><div class="kpi"><div class="l">Effectif</div><div class="v">47</div><div class="s"><span class="up-t">+1</span> vs M-1</div></div><div class="kpi"><div class="l">Absentéisme</div><div class="v">4,2<small>%</small></div><div class="s">3,9 % en M-1</div></div></div>
+          <div class="cmp-sw"><span class="on">M-1</span><span>N-1</span></div>
+        </div></div>
+      </article>
+    </div>
+    <p class="how-note rv">La connexion directe aux logiciels de paie n'est pas proposée à ce jour : le dépôt se fait depuis l'application.</p>
+  </div>
+</section>
+
+<!-- 08 LEZÈBRE -->
+<section class="sec" id="lezebre" aria-labelledby="t-grp" style="background:linear-gradient(180deg,#010727 0%,#1A1040 100%)">
+  <div class="wrap group">
+    <div class="vid-st rv"><figure class="vid">
+      <video id="lzv" muted loop playsinline preload="metadata" poster="assets/ec-poster.jpg" aria-label="Vidéo leZèbre : un professionnel avance aux côtés d'un zèbre dans un couloir de bureaux.">
+        <source src="assets/ec-accompagnement-720.mp4" type="video/mp4">
+      </video>
+      <a class="lzpill" href="https://lezebre.io/experts-comptables"><span><svg aria-hidden="true"><use href="#zb"/></svg></span>Appuyez-vous sur le Zèbre</a>
+      <button class="pp-btn" id="lzvBtn" type="button" aria-label="Mettre la vidéo en pause"><svg viewBox="0 0 14 14" id="lzvIc"><rect x="3" y="2" width="3" height="10" rx="1"/><rect x="8" y="2" width="3" height="10" rx="1"/></svg></button>
+    </figure></div>
+    <div class="rv" style="--d:.1s">
+      <div class="idx"><span class="n">08</span>by leZèbre</div>
+      <h2 class="h2" id="t-grp">Derrière EmployiZ, il y a leZèbre.</h2>
+      <p class="lead">leZèbre accompagne déjà les experts-comptables et leurs clients sur la protection sociale. EmployiZ prolonge ce métier en logiciel, édité par leZèbre Tech.</p>
+      <ul class="gpts">
+        <li><div><b>Courtier avant d'être éditeur</b><span>La lecture des contrats santé et prévoyance est notre métier d'origine. C'est elle qui fait naître le Signal leZèbre.</span></div></li>
+        <li><div><b>Éditeur, pas intégrateur</b><span>Produit conçu et développé en interne, à partir des retours de ses utilisateurs.</span></div></li>
+        <li><div><b>Une feuille de route assumée</b><span>Nous présentons ce que le produit fait aujourd'hui, pas ce qu'il fera.</span></div></li>
+      </ul>
+      <div class="ctas"><a class="btn btn-ghost" href="https://lezebre.io/experts-comptables">leZèbre pour les experts-comptables <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 CONFIANCE ET SÉCURITÉ -->
+<section class="sec night" aria-labelledby="t-sec">
+  <div class="wrap">
+    <div class="head-split" style="margin-bottom:0">
+      <div class="rv"><div class="idx"><span class="n">09</span>Confiance et sécurité</div><h2 class="h2" id="t-sec">Des données sensibles. Une exigence de confiance.</h2></div>
+      <p class="lead rv" style="--d:.1s">Rémunérations, arrêts, affiliations : EmployiZ traite ce que l'entreprise a de plus confidentiel. Nous le traitons comme tel.</p>
+    </div>
+    <div class="trust">
+      <div class="rv"><svg viewBox="0 0 28 28"><path d="M14 3c-4.4 0-8 3.4-8 7.7C6 16.5 14 25 14 25s8-8.5 8-14.3C22 6.4 18.4 3 14 3z"/><circle cx="14" cy="11" r="3"/></svg><h3>Hébergement en France</h3><p>Les données restent sur le territoire national.</p></div>
+      <div class="rv" style="--d:.06s"><svg viewBox="0 0 28 28"><rect x="5" y="12" width="18" height="12" rx="2.5"/><path d="M9 12V9a5 5 0 0 1 10 0v3M14 17v3"/></svg><h3>Chiffrement</h3><p>Les données sont chiffrées.</p></div>
+      <div class="rv" style="--d:.12s"><svg viewBox="0 0 28 28"><rect x="3.5" y="4" width="9" height="9" rx="2"/><rect x="15.5" y="4" width="9" height="9" rx="2"/><rect x="3.5" y="15" width="9" height="9" rx="2"/><rect x="15.5" y="15" width="9" height="9" rx="2"/></svg><h3>Cloisonnement par client</h3><p>Chaque dossier n'est accessible que depuis le compte qui lui est rattaché.</p></div>
+      <div class="rv" style="--d:.18s"><svg viewBox="0 0 28 28"><path d="M5 7h18M5 14h18M5 21h11"/><circle cx="21" cy="21" r="2.5"/></svg><h3>Accès tracés</h3><p>Chaque consultation laisse une trace.</p></div>
+      <div class="rv" style="--d:.24s"><svg viewBox="0 0 28 28"><path d="M8 3.5h9l5 5V24.5H8z"/><path d="M17 3.5v5h5M11.5 14h7M11.5 18h7"/></svg><h3>Traitements documentés</h3><p>Dans le cadre du RGPD.</p></div>
+    </div>
+    <div class="rgpd rv"><span class="ok" style="width:28px;height:28px;flex:none"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></span><p><b>leZèbre Tech intervient en qualité de sous-traitant</b> au sens du RGPD. Le cabinet ou l'entreprise reste maître de ses données.</p></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="light sec" id="faq" aria-labelledby="t-faq">
+  <div class="wrap faq">
+    <div class="rv">
+      <div class="idx"><span class="n">FAQ</span>Questions fréquentes</div>
+      <h2 class="h2" id="t-faq">Avant de vous lancer.</h2>
+      <p class="lead">Les points que soulèvent le plus souvent les cabinets et les directions RH.</p>
+    </div>
+    <div class="qa rv" style="--d:.1s">
+      <details open><summary>Faut-il changer de logiciel de paie ?<span class="pl"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg></span></summary><p class="ans">Non. EmployiZ se place en aval de la paie et exploite les fichiers que vous produisez déjà, aux formats EDI, XML et DSN, quel que soit votre logiciel. Votre chaîne de production reste inchangée.</p></details>
+      <details><summary>Comment EmployiZ utilise-t-il les fichiers DSN ?<span class="pl"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg></span></summary><p class="ans">Vous déposez vos déclarations dans l'application, une par une ou par lots. Elles sont lues, normalisées et historisées. Les indicateurs du mois sont disponibles dès le premier dépôt ; les comparaisons apparaissent au fur et à mesure que l'historique est chargé.</p></details>
+      <details><summary>Les données des salariés sont-elles protégées ?<span class="pl"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg></span></summary><p class="ans">Oui. Elles sont hébergées en France, chiffrées, cloisonnées par client et accessibles depuis le seul compte rattaché au dossier. Les traitements sont documentés dans le cadre du RGPD.</p></details>
+      <details><summary>Mon cabinet externalise sa paie. Puis-je utiliser EmployiZ ?<span class="pl"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg></span></summary><p class="ans">EmployiZ part des fichiers DSN, pas du logiciel qui les produit. Si votre prestataire vous transmet les déclarations de vos clients, vous pouvez les déposer. Nous vérifions votre cas précis lors de la démonstration.</p></details>
+      <details><summary>Quels indicateurs sont disponibles ?<span class="pl"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg></span></summary><p class="ans">Effectifs et structure (CDI, CDD, alternants, temps plein et partiel, âges), masse salariale et rémunérations par catégorie et par sexe, absentéisme, turnover, égalité professionnelle, santé et sécurité, couvertures santé et prévoyance avec le Signal leZèbre, et comparaison dans le temps.</p></details>
+      <details><summary>EmployiZ remplace-t-il un SIRH ?<span class="pl"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg></span></summary><p class="ans">Non, il le complète. Un SIRH gère des processus ; EmployiZ lit et met en perspective la donnée déclarée. Ce n'est ni un logiciel de paie, ni un outil de recrutement.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 09 CONVERSION FINALE -->
+<section class="sec final" id="demo" aria-labelledby="t-demo">
+  <svg class="bigz" viewBox="0 0 84 100" aria-hidden="true"><defs><linearGradient id="zfade" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" stop-color="#C6FF2E" stop-opacity="0"/><stop offset=".55" stop-color="#C6FF2E" stop-opacity=".55"/><stop offset="1" stop-color="#C6FF2E"/></linearGradient></defs><use href="#z"/></svg>
+  <div class="wrap final-g">
+    <div class="rv">
+      <div class="idx"><span class="n">10</span>Démonstration</div>
+      <h2 class="h2" id="t-demo">Et si vos DSN devenaient votre meilleur outil de conseil ?</h2>
+      <p class="lead">Trente minutes, un dossier représentatif de votre activité, vos questions. Nous vous montrons EmployiZ en conditions réelles et nous précisons son périmètre exact.</p>
+    </div>
+    <form class="form rv" id="form" novalidate style="--d:.12s">
+      <h3>Demander une démonstration</h3>
+      <p>Quatre champs, pas un de plus.</p>
+      <div class="fields">
+        <div class="fld"><label for="f-nom">Nom et prénom</label><input id="f-nom" name="nom" autocomplete="name" required><span class="em" aria-live="polite"></span></div>
+        <div class="fld"><label for="f-mail">Email professionnel</label><input id="f-mail" name="email" type="email" autocomplete="email" required><span class="em" aria-live="polite"></span></div>
+        <div class="fld"><label for="f-org">Cabinet ou entreprise</label><input id="f-org" name="organisation" autocomplete="organization" required><span class="em" aria-live="polite"></span></div>
+        <div class="fld"><label for="f-tel">Téléphone <small>(facultatif)</small></label><input id="f-tel" name="tel" type="tel" autocomplete="tel"><span class="em"></span></div>
+      </div>
+      <button class="btn btn-z" type="submit">Demander une démonstration <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
+      <p class="fnote">Vos informations servent uniquement à organiser la démonstration.</p>
+      <div class="fstate" id="fstate" role="status"></div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <div class="lock"><span class="wm">Employi<svg class="z" viewBox="0 0 84 100" aria-hidden="true"><use href="#z"/></svg></span><span class="byz">by leZèbre</span></div>
+        <div class="by">Une solution éditée par <img src="assets/lezebre-tech-logo-inverse.png" alt="leZèbre Tech" width="109" height="30"></div>
+      </div>
+      <div><h4>Produit</h4><ul><li><a href="#solution">La solution</a></li><li><a href="#fonctionnalites">Fonctionnalités</a></li><li><a href="#fonctionnement">Comment ça marche</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+      <div><h4 style="display:flex;align-items:center;gap:8px"><svg aria-hidden="true" style="width:18px;height:18px"><use href="#zb"/></svg>Groupe leZèbre</h4><ul><li><a href="https://lezebre.io">lezebre.io</a></li><li><a href="https://lezebre.io/experts-comptables">Experts-comptables</a></li><li><a href="https://lezebre.tech">leZèbre Tech</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="mailto:contact@lezebre.io">contact@lezebre.io</a></li><li><a href="#demo">Demander une démo</a></li><li><a href="#" data-todo>Mentions légales</a></li><li><a href="#" data-todo>Politique de confidentialité</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 leZèbre Tech. EmployiZ est une solution éditée par leZèbre Tech.</span><span>Maquette de travail. Nom de marque provisoire.</span></div>
+  </div>
+</footer>
+
+<script>
+(() => {
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.documentElement.classList.add('js');
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const fr = (n, d = 0) => n.toLocaleString('fr-FR', { minimumFractionDigits: d, maximumFractionDigits: d });
+
+/* ---------- Données de démonstration (fictives, cohérentes entre elles) ---------- */
+const M = ['nov.','déc.','janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.'];
+const D = {
+  eff:   [43,43,44,44,45,45,46,47,47,46,46,47],
+  effN1: [40,40,41,41,41,42,42,43,43,42,42,42],
+  masse: [146.2,171.3,148.9,149.6,152.3,153.0,156.1,159.4,158.7,156.2,157.9,162.5],
+  masseN1:[138.0,160.2,140.1,141.0,143.3,144.0,146.9,149.8,149.1,147.0,149.4,152.7],
+  abs:   [3.1,3.8,4.6,4.1,3.5,3.2,2.9,2.7,2.4,3.0,3.9,4.2],
+  ent:   [1,0,2,0,1,1,1,2,0,0,1,1],
+  sor:   [0,0,1,0,0,1,0,1,0,1,1,0],
+  ages:  [['< 26',5],['26-35',13],['36-45',14],['46-55',10],['> 55',5]],
+  contrats:[['CDI',39,'var(--data)'],['CDD',5,'#0B0E22'],['Alternance',3,'#C9CBD6']],
+  sexe:[['Femmes',20,'#0B0E22'],['Hommes',27,'var(--data)']]
+};
+
+/* ---------- Icônes de la barre latérale ---------- */
+const I = {
+  grid:'<rect x="2" y="2" width="5" height="5" rx="1.2"/><rect x="9" y="2" width="5" height="5" rx="1.2"/><rect x="2" y="9" width="5" height="5" rx="1.2"/><rect x="9" y="9" width="5" height="5" rx="1.2"/>',
+  users:'<circle cx="6" cy="5.5" r="2.4"/><path d="M1.8 13.5c.4-2.3 2-3.6 4.2-3.6s3.8 1.3 4.2 3.6M10.8 3.3a2.4 2.4 0 0 1 0 4.4M12.2 10.2c1.1.5 1.8 1.6 2 3.3"/>',
+  euro:'<path d="M12.2 3.6A5 5 0 1 0 12.2 12.4M2.5 6.8h7M2.5 9.2h7"/>',
+  doc:'<path d="M4 1.8h5.2L12 4.6v9.6H4z"/><path d="M6.2 8h3.6M6.2 10.8h3.6"/>',
+  cal:'<rect x="2" y="3" width="12" height="11" rx="1.6"/><path d="M2 6.6h12M5 1.6v2.8M11 1.6v2.8"/>',
+  swap:'<path d="M2 5.2h11l-2.6-2.6M14 10.8H3l2.6 2.6"/>',
+  scale:'<path d="M8 2v12M4.5 14h7M3 4.6h10M3 4.6 1.4 9a1.7 1.7 0 0 0 3.2 0zM13 4.6 11.4 9a1.7 1.7 0 0 0 3.2 0z"/>',
+  heart:'<path d="M8 13.8S2 10.4 2 6.1A2.9 2.9 0 0 1 8 4.6a2.9 2.9 0 0 1 6 1.5c0 4.3-6 7.7-6 7.7z"/>',
+  shield:'<path d="M8 1.6l5.4 2v4.1c0 3.3-2.3 5.7-5.4 6.7-3.1-1-5.4-3.4-5.4-6.7V3.6z"/><path d="M5.8 8.1l1.6 1.6 2.9-3"/>',
+  trend:'<path d="M1.6 11.8l4-4 3 3 5.8-5.8M10.6 5h3.8v3.8"/>',
+  alert:'<path d="M8 2.2l6.2 11H1.8z"/><path d="M8 6.6v3M8 11.4v.2"/>'
+};
+const NAV = [['Accueil','grid','accueil'],['Effectifs','users','effectifs'],['Masse salariale','euro','masse'],['Détail salariés','doc'],['Absentéisme','cal','absences'],['Turnover','swap'],['Égalité professionnelle','scale','egalite'],['Santé & Sécurité','heart'],['Couvertures','shield','couvertures'],['Évolutions','trend'],['Alertes','alert']];
+const ico = k => `<svg viewBox="0 0 16 16" aria-hidden="true">${I[k]}</svg>`;
+const chev = '<svg viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3"/></svg>';
+const ZW = cls => `<span class="wm">Employi<svg class="z" viewBox="0 0 84 100"><use href="#z"/></svg></span>`;
+
+/* ---------- Graphiques (SVG mesurés à la largeur réelle) ---------- */
+let gid = 0;
+function lineSVG(w, h, { data, cmp, fmt = v => v, lo, hi, ticks = 3, every }) {
+  const pl = 34, pr = 10, pt = 12, pb = 22, iw = w - pl - pr, ih = h - pt - pb;
+  const all = data.concat(cmp || []);
+  lo = lo ?? Math.min(...all); hi = hi ?? Math.max(...all);
+  const x = i => pl + i * iw / (data.length - 1), y = v => pt + ih - (v - lo) / (hi - lo) * ih;
+  const id = 'g' + (++gid);
+  let s = `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" aria-hidden="true"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#36BCD4" stop-opacity=".22"/><stop offset="1" stop-color="#36BCD4" stop-opacity="0"/></linearGradient></defs>`;
+  for (let k = 0; k <= ticks; k++) { const v = lo + (hi - lo) * k / ticks, yy = y(v).toFixed(1); s += `<line class="gl" x1="${pl}" x2="${w - pr}" y1="${yy}" y2="${yy}"/><text class="ax" x="${pl - 7}" y="${+yy + 3.5}" text-anchor="end">${fmt(v)}</text>`; }
+  const step = every || (iw / data.length < 30 ? 2 : 1);
+  data.forEach((_, i) => { if (i % step === (data.length - 1) % step) s += `<text class="ax" x="${x(i).toFixed(1)}" y="${h - 5}" text-anchor="middle">${M[i]}</text>`; });
+  const p = arr => 'M' + arr.map((v, i) => x(i).toFixed(1) + ' ' + y(v).toFixed(1)).join('L');
+  if (cmp) s += `<path class="cmp" d="${p(cmp)}"/>`;
+  s += `<path class="ar" fill="url(#${id})" d="${p(data)}L${x(data.length - 1).toFixed(1)} ${pt + ih}L${pl} ${pt + ih}Z"/>`;
+  s += `<path class="ln" pathLength="1" d="${p(data)}"/>`;
+  const lx = x(data.length - 1), ly = y(data[data.length - 1]);
+  s += `<circle class="dt" cx="${lx}" cy="${ly}" r="4"/><text class="vl" x="${lx - 8}" y="${ly - 10}" text-anchor="end">${fmt(data[data.length - 1], true)}</text></svg>`;
+  return s;
+}
+function barSVG(w, h, { series, colors, cmp, fmt = v => v, hi, ticks = 3 }) {
+  const pl = 34, pr = 6, pt = 12, pb = 22, iw = w - pl - pr, ih = h - pt - pb, n = series[0].length, g = series.length;
+  hi = hi ?? Math.max(...series.flat(), ...(cmp || []));
+  const y = v => pt + ih - v / hi * ih, slot = iw / n, bw = Math.min(16, slot * (g > 1 ? .32 : .56));
+  let s = `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" aria-hidden="true">`;
+  for (let k = 0; k <= ticks; k++) { const v = hi * k / ticks, yy = y(v).toFixed(1); s += `<line class="gl" x1="${pl}" x2="${w - pr}" y1="${yy}" y2="${yy}"/><text class="ax" x="${pl - 7}" y="${+yy + 3.5}" text-anchor="end">${fmt(v)}</text>`; }
+  const step = slot < 30 ? 2 : 1;
+  for (let i = 0; i < n; i++) {
+    const cx = pl + slot * i + slot / 2;
+    series.forEach((ser, j) => {
+      const bx = cx - (g * bw + (g - 1) * 3) / 2 + j * (bw + 3), v = ser[i];
+      if (v > 0) s += `<rect class="br" style="transition-delay:${(i * .04).toFixed(2)}s" x="${bx.toFixed(1)}" y="${y(v).toFixed(1)}" width="${bw.toFixed(1)}" height="${(pt + ih - y(v)).toFixed(1)}" rx="3" fill="${colors[j]}" ${i === n - 1 || g > 1 ? '' : 'opacity=".55"'}/>`;
+    });
+    if (cmp) s += `<line x1="${(cx - bw / 2 - 3).toFixed(1)}" x2="${(cx + bw / 2 + 3).toFixed(1)}" y1="${y(cmp[i]).toFixed(1)}" y2="${y(cmp[i]).toFixed(1)}" stroke="#0B0E22" stroke-width="1.5" stroke-dasharray="2 2" opacity=".55"/>`;
+    if (i % step === (n - 1) % step) s += `<text class="ax" x="${cx.toFixed(1)}" y="${h - 5}" text-anchor="middle">${M[i]}</text>`;
+  }
+  return s + '</svg>';
+}
+function donutSVG(size, parts, center, sub) {
+  const r = size / 2 - 9, tot = parts.reduce((a, p) => a + p[1], 0);
+  let off = 0, s = `<svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" aria-hidden="true" style="transform:rotate(-90deg)">`;
+  parts.forEach(([, v, c]) => { const len = v / tot * 100; s += `<circle class="dn" cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="${c}" stroke-width="13" pathLength="100" stroke-dasharray="${Math.max(len - .8, 0)} ${100 - len + .8}" stroke-dashoffset="${-off}" data-off="${-off}"/>`; off += len; });
+  s += `</svg><div style="position:absolute;inset:0;display:grid;place-content:center;text-align:center"><b style="font-size:${size > 110 ? 20 : 16}px;letter-spacing:-.03em">${center}</b><small style="font-size:10px;color:var(--app-mute)">${sub}</small></div>`;
+  return `<div style="position:relative;width:${size}px;height:${size}px;flex:none">${s}</div>`;
+}
+const donut = (parts, center, sub, size = 112) => {
+  const tot = parts.reduce((a, p) => a + p[1], 0);
+  return `<div class="dnw">${donutSVG(size, parts, center, sub)}<div class="dnl">${parts.map(([l, v, c]) => `<span><i style="background:${c}"></i>${l}<b>${v}</b></span>`).join('')}</div></div>`;
+};
+const hbars = rows => { const tot = rows.reduce((a, r) => a + r[1], 0), mx = Math.max(...rows.map(r => r[1])); return rows.map(([l, v]) => `<div class="hb"><span>${l}</span><span class="tr"><b style="--w:${(v / mx * 100).toFixed(1)}%"></b></span><span class="n">${v}</span><span class="p">${fr(v / tot * 100, 1)} %</span></div>`).join(''); };
+
+const CH = {
+  effLine: w => lineSVG(w, 168, { data: D.eff, cmp: D.effN1, lo: 38, hi: 48, ticks: 2, fmt: v => fr(v) }),
+  effLineS: w => lineSVG(w, 150, { data: D.eff, lo: 40, hi: 48, ticks: 2, fmt: v => fr(v) }),
+  masseLine: w => lineSVG(w, +((w < 400) ? 140 : 150), { data: D.masse, cmp: D.masseN1, lo: 130, hi: 175, ticks: 3, fmt: (v, last) => last ? fr(v, 1) + ' k€' : fr(v) }),
+  masseBars: w => barSVG(w, 180, { series: [D.masse], colors: ['#36BCD4'], cmp: D.masseN1, hi: 180, fmt: v => fr(v) }),
+  absLine: w => lineSVG(w, 168, { data: D.abs, lo: 0, hi: 5, ticks: 5, every: 0, fmt: (v, last) => last ? fr(v, 1) + ' %' : fr(v) + ' %' }),
+  mvt: w => barSVG(w, 168, { series: [D.ent, D.sor], colors: ['#36BCD4', '#0B0E22'], hi: 3, fmt: v => fr(v) })
+};
+function drawCharts(root) {
+  $$('.ch[data-ch]', root).forEach(el => {
+    const w = Math.max(200, Math.floor(el.clientWidth));
+    if (el._w === w) return; el._w = w;
+    el.innerHTML = CH[el.dataset.ch](w);
+    if (el.classList.contains('drawn') || reduce) el.classList.add('drawn');
+  });
+}
+
+/* ---------- Cockpit ---------- */
+const kpi = (l, v, s, o = {}) => `<div class="kpi${o.sig ? ' sig' : ''}"><div class="l">${l}</div><div class="v"${o.n != null ? ` data-n="${o.n}" data-dec="${o.d || 0}" data-suf="${o.suf || ''}"` : ''}>${v}</div><div class="s">${o.sig ? '<span class="stag">Signal leZèbre</span>' : s}</div></div>`;
+const panel = (t, inner, extra = '') => `<div class="panel"><h4><span>${t}</span>${extra}</h4>${inner}</div>`;
+const lg = (a, b) => `<span class="legend"><span><i style="background:var(--data)"></i>${a}</span>${b ? `<span><i class="dash"></i>${b}</span>` : ''}</span>`;
+const alertCov = `<div class="alert"><span class="ic"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.2"/><path d="M8 5v3.4M8 11v.1"/></svg></span><div><strong>Couverture santé incomplète <span class="stag">Signal leZèbre</span></strong><p>La couverture santé des non-cadres est inférieure au seuil de 95 %.</p></div></div>`;
+
+const VIEWS = {
+  accueil: {
+    crumb: 'Accueil', label: 'Synthèse · octobre 2026',
+    kpis: [
+      kpi('Effectif total', '47', 'salariés déclarés', { n: 47 }),
+      kpi('Masse salariale brute', '162 480 €', 'mensuelle', { n: 162480, suf: ' €' }),
+      kpi('Absentéisme', '4,2 %', 'taux global', { n: 4.2, d: 1, suf: ' %' }),
+      kpi('Turnover', '11,0 %', 'sur 12 mois', { n: 11, d: 1, suf: ' %' }),
+      kpi('Couverture prévoyance', '100 %', 'taux de couverture', { n: 100, suf: ' %' }),
+      kpi('Salaire moyen brut', '3 457 €', 'par salarié', { n: 3457, suf: ' €' }),
+      kpi('Ancienneté moy. CDI', '6,3', 'années', {}),
+      kpi('Taux de féminisation', '42,6 %', 'part des femmes', { n: 42.6, d: 1, suf: ' %' }),
+      kpi('Couverture santé', '91,5 %', 'taux de couverture', { n: 91.5, d: 1, suf: ' %', sig: 1 })
+    ],
+    extraK: kpi('Alertes', '1', 'à examiner'),
+    panels: [
+      panel('Évolution des effectifs', '<div class="ch anim" data-ch="effLine"></div>', lg('2026', 'N-1')),
+      panel('Répartition par âge', '<div class="anim">' + hbars(D.ages) + '</div>'),
+      panel('Type de contrat', '<div class="anim">' + donut(D.contrats, '47', 'salariés') + '</div>')
+    ]
+  },
+  effectifs: {
+    crumb: 'Effectifs', label: 'Effectifs et structure · octobre 2026', kc: 4,
+    kpis: [kpi('Effectif total', '47', '<span class="up-t">+1</span> vs septembre'), kpi('Effectif moyen', '45,3', 'sur 12 mois'), kpi('CDI', '39', '83,0 % de l\'effectif'), kpi('Temps partiel', '6', '12,8 % de l\'effectif')],
+    pc: '1.6fr 1fr',
+    panels: [panel('Évolution des effectifs', '<div class="ch anim" data-ch="effLine"></div>', lg('2026', 'N-1')), panel('Répartition par âge', '<div class="anim">' + hbars(D.ages) + '</div>'), panel('Type de contrat', '<div class="anim">' + donut(D.contrats, '47', 'salariés') + '</div>'), panel('Temps de travail', '<div class="anim">' + donut([['Temps plein', 41, 'var(--data)'], ['Temps partiel', 6, '#0B0E22']], '87,2 %', 'temps plein') + '</div>')]
+  },
+  masse: {
+    crumb: 'Masse salariale', label: 'Masse salariale et rémunérations · octobre 2026', kc: 4,
+    kpis: [kpi('Masse salariale brute', '162 480 €', '<span class="up-t">+6,4 %</span> sur un an'), kpi('Salaire moyen brut', '3 457 €', 'par salarié'), kpi('Salaire médian brut', '3 120 €', 'par salarié'), kpi('Part variable', '7,8 %', 'primes et variable')],
+    pc: '1fr',
+    panels: [panel('Masse salariale brute mensuelle <em>(k€)</em>', '<div class="ch anim" data-ch="masseBars"></div>', '<span class="legend"><span><i style="background:var(--data)"></i>2026</span><span><i class="dash"></i>N-1</span></span>'),
+      panel('Salaire moyen par catégorie', `<table class="tbl"><thead><tr><th>Catégorie</th><th class="r">Nb sal.</th><th class="r">Sal. moyen</th><th class="r">Sal. médian</th><th class="r">Variation N-1</th></tr></thead><tbody><tr><td><span class="cov"><i></i>Cadres</span></td><td class="r">9</td><td class="r">5 180 €</td><td class="r">4 950 €</td><td class="r pos">+3,1 %</td></tr><tr><td><span class="cov"><i style="background:#0B0E22"></i>Non-cadres</span></td><td class="r">38</td><td class="r">3 049 €</td><td class="r">2 910 €</td><td class="r pos">+2,4 %</td></tr><tr><td>Ensemble</td><td class="r">47</td><td class="r">3 457 €</td><td class="r">3 120 €</td><td class="r pos">+2,6 %</td></tr></tbody></table>`)]
+  },
+  absences: {
+    crumb: 'Absentéisme', label: 'Absentéisme et mouvements · octobre 2026', kc: 4,
+    kpis: [kpi('Absentéisme', '4,2 %', '3,9 % en septembre'), kpi('Turnover', '11,0 %', 'sur 12 mois'), kpi('Entrées', '10', 'sur 12 mois'), kpi('Sorties', '5', 'sur 12 mois')],
+    pc: '1fr 1fr',
+    panels: [panel('Taux d\'absentéisme', '<div class="ch anim" data-ch="absLine"></div>', lg('Taux mensuel')), panel('Entrées et sorties', '<div class="ch anim" data-ch="mvt"></div>', '<span class="legend"><span><i style="background:var(--data)"></i>Entrées</span><span><i style="background:#0B0E22"></i>Sorties</span></span>')]
+  },
+  couvertures: {
+    crumb: 'Couvertures', label: 'Couvertures santé et prévoyance · octobre 2026', kc: 4,
+    kpis: [kpi('Couverture santé', '91,5 %', '43 salariés sur 47', { sig: 1 }), kpi('Couverture prévoyance', '100 %', '47 salariés sur 47'), kpi('Non couverts en santé', '4', 'non-cadres'), kpi('Seuil attendu', '95 %', 'par population')],
+    pc: '1fr',
+    panels: [panel('État des couvertures par population', `<table class="tbl"><thead><tr><th>Population</th><th class="r">Santé</th><th></th><th class="r">Prévoyance</th><th></th></tr></thead><tbody><tr><td>Cadres</td><td class="r">9 / 9</td><td><span class="cov"><i></i>Couverture complète</span></td><td class="r">9 / 9</td><td><span class="cov"><i></i>Complète</span></td></tr><tr><td>Non-cadres</td><td class="r">34 / 38</td><td><span class="cov ko"><i></i>89,5 % · sous le seuil</span></td><td class="r">38 / 38</td><td><span class="cov"><i></i>Complète</span></td></tr><tr><td>Ensemble</td><td class="r">43 / 47</td><td><span class="cov ko"><i></i>91,5 %</span></td><td class="r">47 / 47</td><td><span class="cov"><i></i>100 %</span></td></tr></tbody></table>`), alertCov]
+  },
+  egalite: {
+    crumb: 'Égalité professionnelle', label: 'Égalité professionnelle · octobre 2026', kc: 4,
+    kpis: [kpi('Taux de féminisation', '42,6 %', '20 femmes sur 47'), kpi('Écart F/H cadres', '-9,0 %', 'salaire moyen'), kpi('Écart F/H non-cadres', '-5,2 %', 'salaire moyen'), kpi('Femmes cadres', '3', 'sur 9 cadres')],
+    pc: '1.4fr 1fr',
+    panels: [panel('Salaire moyen par catégorie et par sexe', `<div class="gb anim">${[['Cadres', 4860, 5340], ['Non-cadres', 2960, 3121]].map(([c, f, h]) => `<div class="row"><span>${c}</span><div class="bars"><span class="bar"><b style="--w:${(f / 5340 * 78).toFixed(1)}%;background:#0B0E22"></b><span>${fr(f)} €</span></span><span class="bar"><b style="--w:${(h / 5340 * 78).toFixed(1)}%;background:var(--data)"></b><span>${fr(h)} €</span></span></div></div>`).join('')}</div>`, '<span class="legend"><span><i style="background:#0B0E22"></i>Femmes</span><span><i style="background:var(--data)"></i>Hommes</span></span>'), panel('Répartition femmes / hommes', '<div class="anim">' + donut(D.sexe, '42,6 %', 'femmes') + '</div>')]
+  }
+};
+
+function cockpit(view) {
+  const V = VIEWS[view];
+  const side = NAV.map(([l, k, v]) => `<div class="side-i${v === view ? ' on' : ''}">${ico(k)}<span>${l}</span>${l === 'Alertes' ? '<span class="bd">1</span>' : ''}</div>`).join('');
+  return `<div class="app"><aside class="app-side"><div class="app-logo">${ZW()}</div>${side}</aside><div class="app-main">
+    <div class="app-top"><span class="crumb">${V.crumb}</span><span class="sel">Société démo ${chev}</span><span class="sel">Octobre 2026 ${chev}</span><span class="up"><svg viewBox="0 0 14 14"><path d="M7 10V2.5M3.8 5.5 7 2.3l3.2 3.2M2 11.8h10"/></svg><span class="t">Charger ma DSN</span></span><span class="avatar">CD</span></div>
+    ${body(V)}</div></div>`;
+}
+const body = V => `<div class="app-body"><div class="sec-l">${V.label}</div><div class="kgrid" style="--kc:${V.kc || 5}">${V.kpis.join('')}${V.extraK || ''}</div><div class="pgrid" style="${V.pc ? '--pc:' + V.pc : ''}">${V.panels.join('')}</div></div>`;
+
+/* Révéler les graphiques quand ils entrent à l'écran */
+const drawIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('drawn'); drawIO.unobserve(e.target); } }), { threshold: .25 });
+const arm = root => { drawCharts(root); $$('.anim', root).forEach(a => reduce ? a.classList.add('drawn') : drawIO.observe(a)); };
+
+/* Hero */
+const heroApp = $('#heroApp');
+heroApp.innerHTML = cockpit('accueil');
+arm(heroApp);
+// compteurs illustratifs (valeurs fictives)
+if (!reduce) $$('[data-n]', heroApp).forEach((el, i) => {
+  const n = +el.dataset.n, d = +el.dataset.dec, suf = el.dataset.suf, t0 = performance.now() + 500 + i * 60, dur = 1300;
+  const tick = t => { const k = Math.min(1, Math.max(0, (t - t0) / dur)), e = 1 - Math.pow(1 - k, 3); el.textContent = fr(n * e, d) + suf; if (k < 1) requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+});
+
+/* Piliers : KPI */
+$('#pilK').innerHTML = [VIEWS.accueil.kpis[0], VIEWS.accueil.kpis[1], VIEWS.accueil.kpis[5], VIEWS.accueil.kpis[2], VIEWS.accueil.kpis[3], VIEWS.accueil.kpis[7]].join('').replace(/ data-n="[^"]*" data-dec="[^"]*" data-suf="[^"]*"/g, '');
+arm(document.querySelector('.pillars'));
+
+/* ---------- 04 Onglets produit ---------- */
+const TABS = [
+  ['effectifs', 'Pilotage des effectifs', 'Effectif total et moyen, CDI, CDD, alternants, temps plein et partiel, pyramide des âges.'],
+  ['masse', 'Masse salariale', 'Masse salariale brute, salaire moyen et médian par catégorie, part variable, comparaison sur un an.'],
+  ['absences', 'Absentéisme et turnover', 'Taux d\'absentéisme mois par mois, entrées, sorties et turnover.'],
+  ['couvertures', 'Couvertures santé et prévoyance', 'Taux d\'affiliation par population confronté au seuil attendu. Le Signal leZèbre remonte les couvertures incomplètes.'],
+  ['egalite', 'Égalité professionnelle', 'Taux de féminisation et écart de rémunération femmes-hommes par catégorie.']
+];
+const tabs = $('#tabs'), prodApp = $('#prodApp'), panelEl = $('#prodPanel'), tabDesc = $('#tabDesc');
+tabs.innerHTML = TABS.map(([k, t, d], i) => `<button class="tab" role="tab" id="tab-${k}" aria-controls="prodPanel" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-k="${k}"><span class="tn">0${i + 1}</span><span class="tt">${t}</span><span class="td">${d}</span></button>`).join('');
+function select(k, focus) {
+  $$('.tab', tabs).forEach(b => { const on = b.dataset.k === k; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; if (on && focus) b.focus(); if (on && innerWidth <= 980) b.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reduce ? 'auto' : 'smooth' }); });
+  panelEl.setAttribute('aria-labelledby', 'tab-' + k);
+  tabDesc.textContent = TABS.find(t => t[0] === k)[2];
+  const first = !prodApp.firstChild;
+  prodApp.innerHTML = cockpit(k);
+  const b = $('.app-body', prodApp); if (!first && !reduce) b.classList.add('swap');
+  arm(prodApp);
+  if (!first) $$('.anim', prodApp).forEach(a => a.classList.add('drawn'));
+}
+select('effectifs');
+tabs.addEventListener('click', e => { const b = e.target.closest('.tab'); if (b) select(b.dataset.k); });
+tabs.addEventListener('keydown', e => {
+  const ks = TABS.map(t => t[0]), cur = ks.indexOf($('.tab[aria-selected="true"]', tabs).dataset.k);
+  const map = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 };
+  if (map[e.key]) { e.preventDefault(); select(ks[(cur + map[e.key] + ks.length) % ks.length], true); }
+  if (e.key === 'Home') { e.preventDefault(); select(ks[0], true); }
+  if (e.key === 'End') { e.preventDefault(); select(ks[ks.length - 1], true); }
+});
+
+/* ---------- Hero : champ de rubriques DSN (décor) ---------- */
+const codes = ['S10.G00.00.001','S20.G00.05.001','S21.G00.06.001','S21.G00.11.001','S21.G00.30.001','S21.G00.30.006','S21.G00.40.001','S21.G00.40.007','S21.G00.40.013','S21.G00.51.001','S21.G00.51.011','S21.G00.51.013','S21.G00.60.001','S21.G00.62.001','S21.G00.70.012','S21.G00.78.001','S21.G00.81.004'];
+const vals = ["'01'","'02'","'*****'","'10'","'003'","'1001'","'2026-10-01'","'2026-10-31'","'P'","'07'","'2'","'#####'"];
+let rnd = 7; const R = () => (rnd = (rnd * 9301 + 49297) % 233280) / 233280;
+const col = () => { let s = ''; for (let i = 0; i < 70; i++) { const c = codes[Math.floor(R() * codes.length)]; const line = `${c},${vals[Math.floor(R() * vals.length)]}`; s += (R() > .93 ? `<b>${line}</b>` : line) + '<br>'; } return s; };
+$('#dsnCols').innerHTML = Array.from({ length: 6 }, () => { const c = col(); return `<div>${c}${c}</div>`; }).join('');
+
+/* ---------- 02 Scène DSN → Z → vision ---------- */
+const BL = [
+  ['S21.G00.30', 'Individu', 'sexe, date de naissance'],
+  ['S21.G00.40', 'Contrat', 'nature, statut, temps de travail'],
+  ['S21.G00.51', 'Rémunération', 'brut, salaire de base, primes'],
+  ['S21.G00.60', 'Arrêt de travail', 'motif, dates de début et de fin'],
+  ['S21.G00.62', 'Fin du contrat', 'date, motif de rupture'],
+  ['S21.G00.70', 'Affiliation prévoyance', 'contrats santé et prévoyance']
+];
+const OUT = [
+  ['Pyramide des âges', '38,4 <small>ans</small>', 'âge moyen'],
+  ['Effectif', '47', '39 CDI · 5 CDD · 3 alt.'],
+  ['Masse salariale', '162,5 <small>k€</small>', 'brute mensuelle'],
+  ['Absentéisme', '4,2 <small>%</small>', 'taux global'],
+  ['Turnover', '11,0 <small>%</small>', 'sur 12 mois'],
+  ['Couverture santé', '91,5 <small>%</small>', 'Signal leZèbre', 1]
+];
+const chk = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg>';
+$('#blocks').innerHTML = BL.map(([c, n, r]) => `<div class="blk"><span class="c">${c}</span><span class="raw">${n} · ${r}</span><span class="st">${chk}</span></div>`).join('');
+$('#outs').innerHTML = OUT.map(([l, v, f, s]) => `<div class="out${s ? ' sg' : ''}"><div class="l">${l}</div><div class="v">${v}</div><div class="f">${f}</div></div>`).join('');
+const blks = $$('.blk'), outs = $$('.out'), es = $$('#esteps span'), zfg = $('#zfg'), zpk = $('#zpk'), end = $('#storyEnd');
+const zLen = zfg.getTotalLength();
+let lastP = -1;
+function setP(p) {
+  if (Math.abs(p - lastP) < .002) return; lastP = p;
+  zfg.style.setProperty('--p', p);
+  const pt = zfg.getPointAtLength(zLen * Math.min(p, .999)); zpk.setAttribute('cx', pt.x); zpk.setAttribute('cy', pt.y);
+  BL.forEach((_, i) => { const t = .06 + i * .14; blks[i].classList.toggle('cur', p >= t && p < t + .14); blks[i].classList.toggle('done', p >= t + .14); outs[i].classList.toggle('lit', p >= t + .12); });
+  es.forEach((s, i) => s.classList.toggle('on', p > [.04, .35, .7][i]));
+  end.classList.toggle('on', p > .94);
+}
+const scene = $('#scene');
+const pinned = () => matchMedia('(min-width:981px) and (min-height:741px)').matches;
+let auto = null;
+function sceneScroll() {
+  if (!pinned() || reduce) return;
+  const r = scene.getBoundingClientRect(), span = r.height - innerHeight;
+  setP(Math.min(1, Math.max(0, -r.top / span * 1.08)));
+}
+function playAuto() { // hors épinglage : séquence jouée à l'entrée dans l'écran
+  if (auto) return; const t0 = performance.now(), dur = 3600;
+  auto = 1; const f = t => { const k = Math.min(1, (t - t0) / dur); setP(k); if (k < 1) requestAnimationFrame(f); }; requestAnimationFrame(f);
+}
+if (reduce) setP(1);
+window.__employiz = { setP }; // aide au contrôle visuel
+new IntersectionObserver(e => { if (e[0].isIntersecting && !pinned() && !reduce) playAuto(); }, { threshold: .3 }).observe($('#flow'));
+
+/* ---------- 07 Étapes ---------- */
+new IntersectionObserver((e, o) => e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('played'); o.unobserve(x.target); } }), { threshold: .35 }).observe($('#how'));
+if (reduce) $('#how').classList.add('played');
+
+/* ---------- Révélations ---------- */
+const rvIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rvIO.unobserve(e.target); } }), { threshold: .12, rootMargin: '0px 0px -6% 0px' });
+$$('.rv').forEach(el => reduce ? el.classList.add('in') : rvIO.observe(el));
+
+/* ---------- Défilement : nav, inclinaison du hero, scène ---------- */
+const nav = $('#nav'), shot = $('#heroShot');
+let ticking = false;
+function onScroll() {
+  ticking = false;
+  nav.classList.toggle('scrolled', scrollY > 20);
+  if (!reduce && innerWidth > 980) shot.style.setProperty('--t', Math.max(0, 1 - scrollY / 520).toFixed(3));
+  else shot.style.setProperty('--t', 0);
+  sceneScroll();
+}
+addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+onScroll();
+
+/* Parallaxe légère des cartes satellites (souris, bureau uniquement) */
+if (!reduce && matchMedia('(pointer:fine)').matches) {
+  const sats = $$('.sat');
+  $('.hero').addEventListener('pointermove', e => { const x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5; sats.forEach((s, i) => s.style.transform = `translate(${x * (i ? -14 : 12)}px, ${y * (i ? -10 : 8)}px)`); });
+}
+
+/* Redimensionnement : graphiques recalculés à la largeur réelle */
+let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { $$('.ch[data-ch]').forEach(c => c._w = 0); drawCharts(document); $$('.ch.anim').forEach(c => c.classList.add('drawn')); onScroll(); }, 150); });
+
+/* ---------- Menu mobile ---------- */
+const burger = $('.burger');
+burger.addEventListener('click', () => { const o = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', o); burger.setAttribute('aria-label', o ? 'Fermer le menu' : 'Ouvrir le menu'); });
+$$('#sheet a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); burger.setAttribute('aria-expanded', false); }));
+addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) { nav.classList.remove('open'); burger.setAttribute('aria-expanded', false); burger.focus(); } });
+
+/* ---------- Formulaire (non relié à un service d'envoi) ---------- */
+const form = $('#form'), fstate = $('#fstate');
+const rules = { nom: v => v.trim().length >= 2 || 'Indiquez votre nom.', email: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) || 'Indiquez une adresse email valide.', organisation: v => v.trim().length >= 2 || 'Indiquez votre cabinet ou votre entreprise.' };
+function check(inp) { const r = rules[inp.name]; if (!r) return true; const res = r(inp.value), f = inp.closest('.fld'); f.classList.toggle('err', res !== true); $('.em', f).textContent = res === true ? '' : res; inp.setAttribute('aria-invalid', res !== true); return res === true; }
+$$('input', form).forEach(i => i.addEventListener('blur', () => { if (i.value) check(i); }));
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const ok = $$('input', form).map(check).every(Boolean);
+  if (!ok) { $('.fld.err input', form).focus(); return; }
+  fstate.innerHTML = 'Merci. Cette maquette n\'est pas encore reliée à un service d\'envoi : votre demande n\'a pas été transmise. Écrivez-nous en attendant à <a href="mailto:contact@lezebre.io">contact@lezebre.io</a>.';
+  fstate.classList.add('on');
+});
+$$('[data-todo]').forEach(a => a.addEventListener('click', e => e.preventDefault()));
+
+/* ---------- Vidéo leZèbre ---------- */
+const v = $('#lzv'), vb = $('#lzvBtn'), vi = $('#lzvIc');
+let userPaused = reduce;
+const icon = playing => { vi.innerHTML = playing ? '<rect x="3" y="2" width="3" height="10" rx="1"/><rect x="8" y="2" width="3" height="10" rx="1"/>' : '<path d="M4 2.2v9.6L11.6 7z"/>'; vb.setAttribute('aria-label', playing ? 'Mettre la vidéo en pause' : 'Lire la vidéo'); };
+icon(false);
+v.addEventListener('play', () => icon(true)); v.addEventListener('pause', () => icon(false));
+vb.addEventListener('click', () => { if (v.paused) { userPaused = false; v.play().catch(() => {}); } else { userPaused = true; v.pause(); } });
+new IntersectionObserver(e => { if (e[0].isIntersecting) { if (!userPaused) v.play().catch(() => {}); } else v.pause(); }, { threshold: .4 }).observe(v);
+})();
+</script>
+</body>
+</html>
