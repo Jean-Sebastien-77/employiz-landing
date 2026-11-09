@@ -60,3 +60,10 @@ Glyphe dessiné (pas un caractère de police), identique partout, aussi lourd qu
 Reprise de la grammaire de lezebre.io : un grand aplat en dégradé, un seul coin très arrondi, qui sort du bord de l'écran, et le sujet qui déborde dessus.
 - Hero : aplat en dégradé citron (du citron pâle au citron vif), le cockpit pose dessus comme le zèbre sur l'aplat rose du groupe ; second aplat bleu nuit à droite, en contrepoint.
 - Section 08 by leZèbre : aplat rose vers corail du groupe derrière la vidéo. Même forme, couleur de chaque marque : le lien entre les deux est visuel, sans le dire.
+
+### V3, ajustements
+
+- Section 03 : en-tête retiré (les trois verbes portent déjà les cartes), titre gardé pour les lecteurs d'écran uniquement.
+- Cartes Visualisez, Comprenez, Conseillez empilées au défilement : chaque carte se cale en haut et la suivante glisse par-dessus, la précédente recule légèrement. Sur mobile, ou si une carte ne tient pas dans la hauteur de l'écran, elles restent en liste simple pour ne rien couper.
+- Bloc « Le produit existe, voici ses écrans » supprimé ; les captures restent dans `assets/` mais ne sont plus affichées dans la V3.
+- Numérotation des sections rendue continue (02 à 08).
