@@ -365,93 +365,41 @@ section{position:relative}
 .tab[aria-selected="true"] .td{max-height:140px;opacity:1}
 .tab[aria-selected="true"] .tn::after{content:"";display:block;width:6px;height:6px;border-radius:50%;background:var(--zest);box-shadow:0 0 0 1.5px var(--txt);margin-top:8px}
 .prod-cap{font-size:13px;color:var(--mute);margin-top:14px}
-.real{margin-top:clamp(64px,8vw,110px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:clamp(24px,4vw,64px);align-items:start}
-.real h3{font-size:clamp(24px,2.2vw,32px);font-weight:600;letter-spacing:-.035em;line-height:1.1}
-.real p{color:var(--mute);margin-top:12px;font-size:15.5px}
-.caps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.caps figure{margin:0;background:#fff;border-radius:12px;box-shadow:0 0 0 1px var(--line);overflow:hidden}
-.caps figure.w{grid-column:1/-1}
-.caps img{width:100%;height:auto}
-.caps figcaption{font-size:12.5px;color:var(--mute);padding:10px 14px;border-top:1px solid var(--paper-2)}
 
-/* ---------- 05 Cabinets ---------- */
-.cab{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,96px);align-items:center}
-.cab .h2{font-size:clamp(36px,4vw,60px)}
-.bens{list-style:none;padding:0;margin:44px 0 0;counter-reset:b}
-.bens li{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:22px 0;border-top:1px solid var(--line-d)}
+/* ---------- 04 Cabinets (éditorial) ---------- */
+.cab-s{padding:clamp(104px,13vw,190px) 0 clamp(40px,5vw,72px)}
+.cab-h{font-size:clamp(44px,7.2vw,112px);font-weight:600;letter-spacing:-.055em;line-height:.95;max-width:13ch;text-wrap:balance}
+.cab-h .dim{color:#5D67A6}
+.cab{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(40px,7vw,120px);align-items:start;margin-top:clamp(56px,7vw,104px)}
+.cab-side{position:sticky;top:120px}
+.cab-side .lead{margin-top:0;max-width:420px}
+.cab-side .ctas{margin-top:32px}
+.bens{list-style:none;padding:0;margin:0;counter-reset:b}
+.bens li{position:relative;display:grid;grid-template-columns:72px 1fr;gap:4px 20px;padding:30px 0 32px}
+.bens li::before{counter-increment:b;content:"0" counter(b);grid-row:1/3;font-family:"Geist Mono",monospace;font-size:14px;color:var(--zest);padding-top:9px}
+.bens li::after{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--line-d2);transform-origin:left;transform:scaleX(var(--lx,1));transition:transform 1.2s var(--ease) var(--d,0s)}
+.js .bens li.rv:not(.in)::after{--lx:0}
 .bens li:last-child{border-bottom:1px solid var(--line-d)}
-.bens li::before{counter-increment:b;content:"0" counter(b);font-family:"Geist Mono",monospace;font-size:13px;color:var(--zest);padding-top:4px}
-.bens h3{font-size:20px;font-weight:600;letter-spacing:-.02em}
-.bens p{color:var(--mute-d);font-size:15.5px;margin-top:6px}
-.dossier{background:#fff;color:var(--app-txt);border-radius:18px;padding:22px;box-shadow:0 40px 100px -30px rgba(0,0,0,.65)}
-.dossier-h{display:flex;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--app-line)}
-.dossier-h .lg{width:40px;height:40px;border-radius:10px;background:#0B0E22;color:#fff;display:grid;place-items:center;font-weight:600;font-size:14px}
-.dossier-h b{display:block;font-size:15px}
-.dossier-h span{font-size:12.5px;color:var(--app-mute)}
-.dossier-h .sel{margin-left:auto}
-.dk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0}
-.dk .kpi .v{font-size:23px}
-.read{background:var(--app-bg);border-radius:12px;padding:16px}
-.read h4{font-size:12.5px;font-weight:600;margin-bottom:10px;display:flex;justify-content:space-between}
-.read h4 em{font-style:normal;color:var(--app-mute);font-weight:500}
-.read ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.read li{display:grid;grid-template-columns:8px 1fr;gap:12px;font-size:14px;line-height:1.45}
-.read li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--data);margin-top:6px}
-.read li.sg::before{background:var(--signal)}
-.read li.zz::before{background:#0B0E22}
+.bens h3{font-size:clamp(22px,2.1vw,30px);font-weight:600;letter-spacing:-.035em;line-height:1.15}
+.bens p{color:var(--mute-d);font-size:16.5px;margin-top:8px;max-width:520px}
+/* titre révélé mot à mot */
+.words .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.words .w>span{display:inline-block;transition:transform 1s var(--ease),opacity 1s var(--ease);transition-delay:calc(var(--k) * 55ms)}
+.js .words:not(.in) .w>span{transform:translateY(105%);opacity:0}
 
-/* ---------- 06 Vision cabinet (feuille de route) ---------- */
-.road{display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px;border-radius:999px;background:var(--txt);color:#fff;font-size:13px;font-weight:500;margin-bottom:22px}
-.road i{width:7px;height:7px;border-radius:50%;background:var(--zest)}
-.porto{position:relative;margin-top:56px}
-.porto .app{grid-template-columns:minmax(0,1fr)}
-.porto .app-body{gap:14px}
-.concept{position:absolute;z-index:2;top:-14px;left:24px;display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 14px;border-radius:999px;background:var(--zest);color:var(--ink);font-size:12.5px;font-weight:600;box-shadow:0 8px 24px -8px rgba(0,0,0,.3)}
-.ptbl td:first-child{font-weight:500}
-.ptbl .co{display:flex;align-items:center;gap:10px}
-.ptbl .co i{width:26px;height:26px;border-radius:7px;background:#EDEBE5;display:grid;place-items:center;font-style:normal;font-size:10.5px;font-weight:600;color:#50557A}
-.filters{display:flex;flex-wrap:wrap;gap:8px}
-.filters .sel.on{background:#0B0E22;color:#fff;border-color:#0B0E22}
-.road-note{margin-top:18px;font-size:14px;color:var(--mute);max-width:720px}
+/* ---------- 06 Sécurité (condensée) ---------- */
+.secu-s{padding:clamp(80px,9vw,132px) 0 clamp(40px,5vw,72px)}
+.secu{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(36px,7vw,112px);align-items:start}
+.secu .h2{font-size:clamp(32px,3.6vw,52px)}
+.secu .lead{max-width:460px}
+.trust{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.trust li{display:grid;grid-template-columns:24px minmax(0,210px) minmax(0,1fr);gap:6px 18px;align-items:baseline;padding:19px 0;border-bottom:1px solid var(--line)}
+.trust svg{width:22px;height:22px;align-self:center;fill:none;stroke:var(--txt);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.trust b{font-size:16.5px;font-weight:600;letter-spacing:-.015em}
+.trust span{font-size:15.5px;color:var(--mute)}
+.faq-s{padding-top:clamp(64px,8vw,112px);border-top:1px solid var(--line)}
 
-/* ---------- 07 Comment ça marche ---------- */
-.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;position:relative}
-.step{background:#fff;border-radius:18px;box-shadow:0 0 0 1px var(--line);padding:26px;display:flex;flex-direction:column;min-width:0}
-.step .sn{font-family:"Geist Mono",monospace;font-size:13px;color:var(--mute)}
-.step h3{font-size:24px;font-weight:600;letter-spacing:-.035em;margin-top:14px}
-.step p{color:var(--mute);margin-top:8px;font-size:15.5px}
-.step .sv{margin-top:auto;padding-top:26px}
-.sv-box{background:var(--app-bg);border-radius:12px;padding:16px;box-shadow:inset 0 0 0 1px var(--app-line);min-height:168px;color:var(--app-txt);font-size:12.5px}
-.drop{border:1.5px dashed #C9C6BD;border-radius:10px;padding:14px;text-align:center;color:var(--app-mute)}
-.files{display:grid;gap:6px;margin-top:10px}
-.fl{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--app-line);border-radius:8px;padding:7px 10px;font-family:"Geist Mono",monospace;font-size:11.5px;transform:translateY(8px);opacity:0;transition:all .5s var(--ease)}
-.fl .ext{margin-left:auto;font-size:10px;padding:2px 6px;border-radius:5px;background:#EFEDE7;color:#50557A}
-.played .fl{transform:none;opacity:1}
-.played .fl:nth-child(2){transition-delay:.15s}.played .fl:nth-child(3){transition-delay:.3s}
-.pipe{display:grid;gap:12px}
-.pp{display:grid;grid-template-columns:20px 1fr auto;gap:10px;align-items:center}
-.pp .ok{background:#E6E4DE;color:transparent;transition:background .3s,color .3s}
-.played .pp .ok{background:var(--zest);color:var(--ink)}
-.played .pp:nth-child(2) .ok{transition-delay:.5s}.played .pp:nth-child(3) .ok{transition-delay:1s}
-.pp .bar{grid-column:2/4;height:4px;border-radius:4px;background:#E6E4DE;overflow:hidden}
-.pp .bar b{display:block;height:100%;background:#0B0E22;transform:scaleX(0);transform-origin:left;transition:transform .8s var(--ease)}
-.played .pp .bar b{transform:scaleX(1)}
-.played .pp:nth-child(2) .bar b{transition-delay:.45s}.played .pp:nth-child(3) .bar b{transition-delay:.95s}
-.pp small{color:var(--app-mute)}
-.mini-k{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.mini-k .kpi{padding:10px 12px}.mini-k .kpi .v{font-size:20px}
-.cmp-sw{display:inline-flex;margin-top:10px;background:#fff;border:1px solid var(--app-line);border-radius:8px;padding:3px;gap:2px;font-size:11.5px}
-.cmp-sw span{padding:4px 10px;border-radius:6px;color:var(--app-mute)}
-.cmp-sw span.on{background:#0B0E22;color:#fff}
-.how-note{margin-top:22px;font-size:14px;color:var(--mute)}
-
-/* ---------- 08 Sécurité ---------- */
-.trust{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line-d);margin-top:64px}
-.trust div{padding:28px 24px 8px 0;min-width:0}
-.trust div+div{padding-left:24px;border-left:1px solid var(--line-d)}
-.trust svg{width:28px;height:28px;fill:none;stroke:var(--zest);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.trust h3{font-size:18px;font-weight:600;letter-spacing:-.02em;margin-top:20px}
-.trust p{font-size:15px;color:var(--mute-d);margin-top:8px}
+/* ---------- 05 by leZèbre ---------- */
 .group{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(32px,5vw,80px);align-items:center}
 .vid-st{position:relative;isolation:isolate;padding:130px 0 64px 10%}
 .vid-st::before{content:"";position:absolute;z-index:-1;left:calc(var(--pad-x) * -1 - (100vw - min(100vw,1280px)) / 2);right:26%;top:0;bottom:0;border-top-right-radius:min(18vw,260px);background:linear-gradient(170deg,#FAB0D7 0%,#F98FA6 42%,#F26A4B 82%,#EE5A3C 100%)}
@@ -469,8 +417,6 @@ section{position:relative}
 .gpts span{color:var(--mute-d);font-size:15px}
 .group .ctas{margin-top:28px}
 @media (max-width:980px){.group{grid-template-columns:1fr}.vid figcaption{display:none}.vid-st{padding:90px 0 36px 8%}.vid-st::before{right:22%;border-top-right-radius:120px}}
-.rgpd{margin-top:48px;padding:20px 24px;border-radius:14px;box-shadow:inset 0 0 0 1px var(--line-d);display:flex;gap:16px;align-items:center;font-size:15.5px;color:#C9CDE2}
-.rgpd b{color:#fff;font-weight:600}
 
 /* ---------- FAQ ---------- */
 .faq{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,96px)}
@@ -525,14 +471,14 @@ footer::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;backgrou
 /* ---------- Responsive ---------- */
 @media (max-width:1180px){
   .sat-up{left:8px} .sat-sig{right:8px}
-  .trust{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .trust div:nth-child(4){padding-left:0;border-left:0}
-  .trust div:nth-child(n+4){border-top:1px solid var(--line-d)}
 }
 @media (max-width:980px){
   .hero{padding-top:118px}
   .shot-wrap{margin-top:110px}
-  .hero-grid,.head-split,.cab,.faq,.final-g,.real{grid-template-columns:1fr;gap:28px}
+  .hero-grid,.head-split,.cab,.secu,.faq,.final-g{grid-template-columns:1fr;gap:28px}
+  .cab{gap:40px}
+  .cab-side{position:static}
+  .bens li{grid-template-columns:44px 1fr}
   .head-split{margin-bottom:44px}
   .hero-side p{max-width:none}
   .shot-wrap{margin-top:48px}
@@ -550,16 +496,14 @@ footer::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;backgrou
   .tab[aria-selected="true"]{background:var(--txt);box-shadow:none}
   .tab[aria-selected="true"] .tt{color:#fff}
   .tab-desc{display:block!important}
-  .how{grid-template-columns:1fr}
-  .trust{grid-template-columns:1fr 1fr}
-  .trust div,.trust div+div{padding:24px 16px 20px 0;border-left:0;border-top:1px solid var(--line-d)}
-  .trust div:nth-child(-n+2){border-top:0}
   .bigz{right:-30vw;top:auto;bottom:-6vw;transform:none;width:90vw;opacity:.9}
   .foot{grid-template-columns:1fr 1fr}
   .foot>div:first-child{grid-column:1/-1}
 }
 @media (max-width:620px){
   body{font-size:16px}
+  .trust li{grid-template-columns:24px minmax(0,1fr)}
+  .trust span{grid-column:2}
   .shot-wrap{margin-top:96px}
   .shot-wrap::before{right:8%;top:-48px;bottom:150px;border-top-right-radius:120px}
   .shot-wrap::after{display:none}
@@ -568,15 +512,8 @@ footer::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;backgrou
   .sat-up{display:none}
   .sat-sig{position:relative;right:auto;top:auto;width:auto;margin:-64px 14px 0;z-index:5}
   .ctas .btn{flex:1 1 100%}
-  .dk{grid-template-columns:1fr 1fr}.dk .kpi:last-child{grid-column:1/-1}
   .fields{grid-template-columns:1fr}
-  .trust{grid-template-columns:1fr}
-  .trust div:nth-child(2){border-top:1px solid var(--line-d)}
-  .rgpd{flex-direction:column;align-items:flex-start}
   .qa .ans{padding-right:0}
-  .concept{left:12px}
-  .dossier{padding:16px}
-  .dossier-h .sel{display:none}
   .pill{padding:22px;border-radius:16px}
   .pill-v{padding:12px}
 }
@@ -621,7 +558,7 @@ footer::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;backgrou
       <a href="#solution">La solution</a>
       <a href="#fonctionnalites">Fonctionnalités</a>
       <a href="#cabinets">Pour les cabinets</a>
-      <a href="#fonctionnement">Comment ça marche</a>
+      <a href="#lezebre">leZèbre</a>
     </nav>
     <a class="btn btn-z" href="#demo">Demander une démo</a>
     <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sheet"><span></span></button>
@@ -630,7 +567,7 @@ footer::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;backgrou
     <a href="#solution">La solution</a>
     <a href="#fonctionnalites">Fonctionnalités</a>
     <a href="#cabinets">Pour les cabinets</a>
-    <a href="#fonctionnement">Comment ça marche</a>
+    <a href="#lezebre">leZèbre</a>
     <a class="btn btn-z" href="#demo">Demander une démo</a>
   </div>
 </header>
@@ -790,124 +727,28 @@ footer::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;backgrou
   </div>
 </section>
 
-<!-- 05 BÉNÉFICE EXPERT-COMPTABLE -->
-<section class="sec night" id="cabinets" aria-labelledby="t-cab">
-  <div class="wrap cab">
-    <div>
-      <div class="rv"><div class="idx"><span class="n">04</span>Pour les cabinets</div>
-      <h2 class="h2" id="t-cab">Vos clients attendent plus que des bulletins de paie.</h2>
-      <p class="lead">Donnez-leur une vision claire de leur entreprise. Vous détenez déjà la donnée sociale de vos dossiers : EmployiZ en fait la matière d'un vrai rendez-vous de conseil.</p></div>
-      <ul class="bens">
-        <li class="rv"><div><h3>Préparez vos rendez-vous avec des données utiles.</h3><p>Des chiffres à commenter, disponibles sans retraitement, dossier par dossier.</p></div></li>
-        <li class="rv" style="--d:.06s"><div><h3>Valorisez les informations que vous détenez déjà.</h3><p>Les DSN que vous produisez cessent d'être une simple formalité déclarative.</p></div></li>
-        <li class="rv" style="--d:.12s"><div><h3>Identifiez de nouveaux sujets de conseil.</h3><p>Masse salariale, absentéisme, couvertures santé et prévoyance : les évolutions se repèrent d'elles-mêmes.</p></div></li>
-        <li class="rv" style="--d:.18s"><div><h3>Renforcez durablement la relation client.</h3><p>Le cabinet et son client regardent la même donnée, celle qui fait foi.</p></div></li>
-      </ul>
-      <div class="ctas rv"><a class="btn btn-z" href="#demo">Demander une démo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div>
-    </div>
-    <div class="dossier rv" style="--d:.15s" aria-hidden="true">
-      <div class="dossier-h">
-        <span class="lg">SD</span>
-        <div><b>Société démo</b><span>Dossier client · 47 salariés · DSN d'octobre</span></div>
-        <span class="sel">Comparer à N-1 <svg viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3"/></svg></span>
-      </div>
-      <div class="dk">
-        <div class="kpi"><div class="l">Effectif</div><div class="v">47</div><div class="s"><span class="up-t">+5</span> sur un an</div></div>
-        <div class="kpi"><div class="l">Masse salariale</div><div class="v">162,5<small>k€</small></div><div class="s"><span class="up-t">+6,4 %</span> sur un an</div></div>
-        <div class="kpi sig"><div class="l">Couverture santé</div><div class="v">91,5<small>%</small></div><div class="s">seuil 95 %</div></div>
-      </div>
-      <div class="read">
-        <h4>Lecture pour le dirigeant <em>Mise en situation</em></h4>
-        <ul>
-          <li>Votre entreprise a recruté 10 personnes et en a vu partir 5 en douze mois.</li>
-          <li class="zz">La masse salariale progresse plus vite que l'effectif : salaire moyen à 3 457 €.</li>
-          <li class="sg">Quatre salariés non-cadres n'apparaissent pas affiliés à la mutuelle.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 06 VISION CABINET (FEUILLE DE ROUTE) -->
-<section class="light sec" aria-labelledby="t-port">
+<!-- 04 POUR LES CABINETS -->
+<section class="sec night cab-s" id="cabinets" aria-labelledby="t-cab">
   <div class="wrap">
-    <div class="head-split" style="margin-bottom:0">
-      <div class="rv"><span class="road"><i></i>Feuille de route</span><h2 class="h2" id="t-port">Tous vos clients. Une seule vision.</h2></div>
-      <p class="lead rv" style="--d:.1s">Aujourd'hui, chaque dossier est suivi dans son propre espace. Demain, la vue consolidée de portefeuille et la gestion des droits par collaborateur vous donneront une lecture d'ensemble de vos clients.</p>
-    </div>
-    <div class="porto cq rv" aria-hidden="true">
-      <span class="concept">Aperçu conceptuel · non disponible à ce jour</span>
-      <div class="app">
-        <div class="app-main">
-          <div class="app-top"><span class="crumb">Portefeuille du cabinet</span><span class="sel">Tous les collaborateurs <svg viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3"/></svg></span><span class="sel">Octobre 2026 <svg viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3"/></svg></span></div>
-          <div class="app-body">
-            <div class="kgrid" style="--kc:4">
-              <div class="kpi"><div class="l">Dossiers suivis</div><div class="v">64</div><div class="s">DSN d'octobre reçues : 61</div></div>
-              <div class="kpi"><div class="l">Effectif consolidé</div><div class="v">1 284</div><div class="s"><span class="up-t">+3,1 %</span> sur un an</div></div>
-              <div class="kpi"><div class="l">Masse salariale globale</div><div class="v">4,21<small>M€</small></div><div class="s">mensuelle brute</div></div>
-              <div class="kpi sig"><div class="l">Dossiers à examiner</div><div class="v">7</div><div class="s">signaux de couverture</div></div>
-            </div>
-            <div class="filters"><span class="sel on">Tous</span><span class="sel">Avec signal</span><span class="sel">Effectif en hausse</span><span class="sel">Absentéisme en hausse</span></div>
-            <div class="panel" style="padding:6px 12px 2px;overflow-x:auto">
-              <table class="tbl ptbl">
-                <thead><tr><th>Dossier</th><th class="r">Effectif</th><th class="r hide-s">Masse salariale</th><th class="r">Var. N-1</th><th class="r hide-s">Absentéisme</th><th>Couvertures</th></tr></thead>
-                <tbody>
-                  <tr><td><span class="co"><i>SD</i>Société démo</span></td><td class="r">47</td><td class="r hide-s">162 480 €</td><td class="r pos">+6,4 %</td><td class="r hide-s">4,2 %</td><td><span class="cov ko"><i></i>Santé 91,5 %</span></td></tr>
-                  <tr><td><span class="co"><i>DA</i>Dossier A</span></td><td class="r">112</td><td class="r hide-s">371 900 €</td><td class="r pos">+2,8 %</td><td class="r hide-s">3,6 %</td><td><span class="cov"><i></i>Complètes</span></td></tr>
-                  <tr><td><span class="co"><i>DB</i>Dossier B</span></td><td class="r">18</td><td class="r hide-s">51 300 €</td><td class="r">-1,2 %</td><td class="r hide-s">5,9 %</td><td><span class="cov"><i></i>Complètes</span></td></tr>
-                  <tr><td><span class="co"><i>DC</i>Dossier C</span></td><td class="r">263</td><td class="r hide-s">902 400 €</td><td class="r pos">+4,1 %</td><td class="r hide-s">4,8 %</td><td><span class="cov ko"><i></i>Prévoyance 93 %</span></td></tr>
-                  <tr><td>Total portefeuille</td><td class="r">1 284</td><td class="r hide-s">4,21 M€</td><td class="r pos">+3,4 %</td><td class="r hide-s">4,3 %</td><td>7 signaux</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+    <div class="idx rv"><span class="n">04</span>Pour les cabinets</div>
+    <h2 class="cab-h words" id="t-cab">Vos clients attendent plus que des <span class="dim">bulletins de paie.</span></h2>
+    <div class="cab">
+      <div class="cab-side rv">
+        <p class="lead">Donnez-leur une vision claire de leur entreprise. Vous détenez déjà la donnée sociale de vos dossiers : EmployiZ en fait la matière d'un vrai rendez-vous de conseil.</p>
+        <div class="ctas"><a class="btn btn-z" href="#demo">Demander une démo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div>
       </div>
+      <ol class="bens">
+        <li class="rv"><h3>Préparez vos rendez-vous avec des données utiles.</h3><p>Des chiffres à commenter, disponibles sans retraitement, dossier par dossier.</p></li>
+        <li class="rv" style="--d:.08s"><h3>Valorisez les informations que vous détenez déjà.</h3><p>Les DSN que vous produisez cessent d'être une simple formalité déclarative.</p></li>
+        <li class="rv" style="--d:.16s"><h3>Identifiez de nouveaux sujets de conseil.</h3><p>Masse salariale, absentéisme, couvertures santé et prévoyance : les évolutions se repèrent d'elles-mêmes.</p></li>
+        <li class="rv" style="--d:.24s"><h3>Renforcez durablement la relation client.</h3><p>Le cabinet et son client regardent la même donnée, celle qui fait foi.</p></li>
+      </ol>
     </div>
-    <p class="road-note rv">Nous présentons ce que le produit fait aujourd'hui, et nous signalons clairement ce qu'il fera demain. Les exports et l'automatisation des dépôts suivent le même chemin.</p>
   </div>
 </section>
 
-<!-- 07 COMMENT ÇA MARCHE -->
-<section class="light alt sec" id="fonctionnement" aria-labelledby="t-how">
-  <div class="wrap">
-    <div class="head-split">
-      <div class="rv"><div class="idx"><span class="n">05</span>Comment ça marche</div><h2 class="h2" id="t-how">De la DSN à la décision. En toute simplicité.</h2></div>
-      <p class="lead rv" style="--d:.1s">EmployiZ se place en aval de la paie. Aucun projet de migration, aucune double saisie, aucune interruption de votre production mensuelle.</p>
-    </div>
-    <div class="how" id="how">
-      <article class="step rv">
-        <span class="sn">01</span><h3>Importez vos DSN</h3>
-        <p>Utilisez les fichiers générés par votre logiciel de paie ou votre prestataire. Une déclaration à la fois ou par lots.</p>
-        <div class="sv" aria-hidden="true"><div class="sv-box">
-          <div class="drop">Déposez vos fichiers ici</div>
-          <div class="files"><span class="fl">DSN_2026-10<span class="ext">.dsn</span></span><span class="fl">DSN_2026-09<span class="ext">.xml</span></span><span class="fl">DSN_2026-08<span class="ext">.edi</span></span></div>
-        </div></div>
-      </article>
-      <article class="step rv" style="--d:.08s">
-        <span class="sn">02</span><h3>Retrouvez vos indicateurs</h3>
-        <p>Les déclarations sont lues, normalisées et conservées. Les indicateurs sont calculés, l'historique se constitue au fil des dépôts.</p>
-        <div class="sv" aria-hidden="true"><div class="sv-box pipe">
-          <div class="pp"><span class="ok"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></span><span>Lecture</span><small>3 fichiers</small><span class="bar"><b></b></span></div>
-          <div class="pp"><span class="ok"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></span><span>Normalisation</span><small>47 salariés</small><span class="bar"><b></b></span></div>
-          <div class="pp"><span class="ok"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></span><span>Historisation</span><small>août à octobre</small><span class="bar"><b></b></span></div>
-        </div></div>
-      </article>
-      <article class="step rv" style="--d:.16s">
-        <span class="sn">03</span><h3>Passez à l'analyse</h3>
-        <p>Explorez les évolutions sociales et préparez vos échanges, avec la comparaison au mois et à l'année précédents.</p>
-        <div class="sv" aria-hidden="true"><div class="sv-box">
-          <div class="mini-k"><div class="kpi"><div class="l">Effectif</div><div class="v">47</div><div class="s"><span class="up-t">+1</span> vs M-1</div></div><div class="kpi"><div class="l">Absentéisme</div><div class="v">4,2<small>%</small></div><div class="s">3,9 % en M-1</div></div></div>
-          <div class="cmp-sw"><span class="on">M-1</span><span>N-1</span></div>
-        </div></div>
-      </article>
-    </div>
-    <p class="how-note rv">La connexion directe aux logiciels de paie n'est pas proposée à ce jour : le dépôt se fait depuis l'application.</p>
-  </div>
-</section>
-
-<!-- 08 LEZÈBRE -->
-<section class="sec" id="lezebre" aria-labelledby="t-grp" style="background:linear-gradient(180deg,#010727 0%,#1A1040 100%)">
+<!-- 05 BY LEZÈBRE -->
+<section class="sec" id="lezebre" aria-labelledby="t-grp" style="background:linear-gradient(180deg,#000F57 0%,#1A1040 100%)">
   <div class="wrap group">
     <div class="vid-st rv"><figure class="vid">
       <video id="lzv" muted loop playsinline preload="metadata" poster="assets/ec-poster.jpg" aria-label="Vidéo leZèbre : un professionnel avance aux côtés d'un zèbre dans un couloir de bureaux.">
@@ -917,39 +758,38 @@ footer::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;backgrou
       <button class="pp-btn" id="lzvBtn" type="button" aria-label="Mettre la vidéo en pause"><svg viewBox="0 0 14 14" id="lzvIc"><rect x="3" y="2" width="3" height="10" rx="1"/><rect x="8" y="2" width="3" height="10" rx="1"/></svg></button>
     </figure></div>
     <div class="rv" style="--d:.1s">
-      <div class="idx"><span class="n">06</span>by leZèbre</div>
+      <div class="idx"><span class="n">05</span>by leZèbre</div>
       <h2 class="h2" id="t-grp">Derrière EmployiZ, il y a leZèbre.</h2>
       <p class="lead">leZèbre accompagne déjà les experts-comptables et leurs clients sur la protection sociale. EmployiZ prolonge ce métier en logiciel, édité par leZèbre Tech.</p>
       <ul class="gpts">
         <li><div><b>Courtier avant d'être éditeur</b><span>La lecture des contrats santé et prévoyance est notre métier d'origine. C'est elle qui fait naître le Signal leZèbre.</span></div></li>
         <li><div><b>Éditeur, pas intégrateur</b><span>Produit conçu et développé en interne, à partir des retours de ses utilisateurs.</span></div></li>
-        <li><div><b>Une feuille de route assumée</b><span>Nous présentons ce que le produit fait aujourd'hui, pas ce qu'il fera.</span></div></li>
       </ul>
       <div class="ctas"><a class="btn btn-ghost" href="https://lezebre.io/experts-comptables">leZèbre pour les experts-comptables <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div>
     </div>
   </div>
 </section>
 
-<!-- 08 CONFIANCE ET SÉCURITÉ -->
-<section class="sec night" aria-labelledby="t-sec">
-  <div class="wrap">
-    <div class="head-split" style="margin-bottom:0">
-      <div class="rv"><div class="idx"><span class="n">07</span>Confiance et sécurité</div><h2 class="h2" id="t-sec">Des données sensibles. Une exigence de confiance.</h2></div>
-      <p class="lead rv" style="--d:.1s">Rémunérations, arrêts, affiliations : EmployiZ traite ce que l'entreprise a de plus confidentiel. Nous le traitons comme tel.</p>
+<!-- 06 CONFIANCE ET SÉCURITÉ -->
+<section class="light alt secu-s" id="securite" aria-labelledby="t-sec">
+  <div class="wrap secu">
+    <div class="rv">
+      <div class="idx"><span class="n">06</span>Confiance et sécurité</div>
+      <h2 class="h2" id="t-sec">Des données sensibles. Une exigence de confiance.</h2>
+      <p class="lead">Rémunérations, arrêts, affiliations : EmployiZ traite ce que l'entreprise a de plus confidentiel. leZèbre Tech intervient en qualité de sous-traitant au sens du RGPD.</p>
     </div>
-    <div class="trust">
-      <div class="rv"><svg viewBox="0 0 28 28"><path d="M14 3c-4.4 0-8 3.4-8 7.7C6 16.5 14 25 14 25s8-8.5 8-14.3C22 6.4 18.4 3 14 3z"/><circle cx="14" cy="11" r="3"/></svg><h3>Hébergement en France</h3><p>Les données restent sur le territoire national.</p></div>
-      <div class="rv" style="--d:.06s"><svg viewBox="0 0 28 28"><rect x="5" y="12" width="18" height="12" rx="2.5"/><path d="M9 12V9a5 5 0 0 1 10 0v3M14 17v3"/></svg><h3>Chiffrement</h3><p>Les données sont chiffrées.</p></div>
-      <div class="rv" style="--d:.12s"><svg viewBox="0 0 28 28"><rect x="3.5" y="4" width="9" height="9" rx="2"/><rect x="15.5" y="4" width="9" height="9" rx="2"/><rect x="3.5" y="15" width="9" height="9" rx="2"/><rect x="15.5" y="15" width="9" height="9" rx="2"/></svg><h3>Cloisonnement par client</h3><p>Chaque dossier n'est accessible que depuis le compte qui lui est rattaché.</p></div>
-      <div class="rv" style="--d:.18s"><svg viewBox="0 0 28 28"><path d="M5 7h18M5 14h18M5 21h11"/><circle cx="21" cy="21" r="2.5"/></svg><h3>Accès tracés</h3><p>Chaque consultation laisse une trace.</p></div>
-      <div class="rv" style="--d:.24s"><svg viewBox="0 0 28 28"><path d="M8 3.5h9l5 5V24.5H8z"/><path d="M17 3.5v5h5M11.5 14h7M11.5 18h7"/></svg><h3>Traitements documentés</h3><p>Dans le cadre du RGPD.</p></div>
-    </div>
-    <div class="rgpd rv"><span class="ok" style="width:28px;height:28px;flex:none"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></span><p><b>leZèbre Tech intervient en qualité de sous-traitant</b> au sens du RGPD. Le cabinet ou l'entreprise reste maître de ses données.</p></div>
+    <ul class="trust">
+      <li class="rv"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 3c-4.4 0-8 3.4-8 7.7C6 16.5 14 25 14 25s8-8.5 8-14.3C22 6.4 18.4 3 14 3z"/><circle cx="14" cy="11" r="3"/></svg><b>Hébergement en France</b><span>Les données restent sur le territoire national.</span></li>
+      <li class="rv" style="--d:.05s"><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="5" y="12" width="18" height="12" rx="2.5"/><path d="M9 12V9a5 5 0 0 1 10 0v3M14 17v3"/></svg><b>Chiffrement</b><span>Les données sont chiffrées.</span></li>
+      <li class="rv" style="--d:.1s"><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="3.5" y="4" width="9" height="9" rx="2"/><rect x="15.5" y="4" width="9" height="9" rx="2"/><rect x="3.5" y="15" width="9" height="9" rx="2"/><rect x="15.5" y="15" width="9" height="9" rx="2"/></svg><b>Cloisonnement par client</b><span>Chaque dossier n'est accessible que depuis le compte qui lui est rattaché.</span></li>
+      <li class="rv" style="--d:.15s"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M5 7h18M5 14h18M5 21h11"/><circle cx="21" cy="21" r="2.5"/></svg><b>Accès tracés</b><span>Chaque consultation laisse une trace.</span></li>
+      <li class="rv" style="--d:.2s"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M8 3.5h9l5 5V24.5H8z"/><path d="M17 3.5v5h5M11.5 14h7M11.5 18h7"/></svg><b>Traitements documentés</b><span>Dans le cadre du RGPD.</span></li>
+    </ul>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="light sec" id="faq" aria-labelledby="t-faq">
+<section class="light sec faq-s" id="faq" aria-labelledby="t-faq">
   <div class="wrap faq">
     <div class="rv">
       <div class="idx"><span class="n">FAQ</span>Questions fréquentes</div>
@@ -957,11 +797,12 @@ footer::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;backgrou
       <p class="lead">Les points que soulèvent le plus souvent les cabinets et les directions RH.</p>
     </div>
     <div class="qa rv" style="--d:.1s">
-      <details open><summary>Faut-il changer de logiciel de paie ?<span class="pl"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg></span></summary><p class="ans">Non. EmployiZ se place en aval de la paie et exploite les fichiers que vous produisez déjà, aux formats EDI, XML et DSN, quel que soit votre logiciel. Votre chaîne de production reste inchangée.</p></details>
+      <details open><summary>Faut-il changer de logiciel de paie ?<span class="pl"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg></span></summary><p class="ans">Non. EmployiZ se place en aval de la paie et exploite les fichiers que vous produisez déjà, aux formats EDI, XML et DSN, quel que soit votre logiciel. Votre chaîne de production reste inchangée : vous déposez simplement vos fichiers depuis l'application.</p></details>
       <details><summary>Comment EmployiZ utilise-t-il les fichiers DSN ?<span class="pl"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg></span></summary><p class="ans">Vous déposez vos déclarations dans l'application, une par une ou par lots. Elles sont lues, normalisées et historisées. Les indicateurs du mois sont disponibles dès le premier dépôt ; les comparaisons apparaissent au fur et à mesure que l'historique est chargé.</p></details>
       <details><summary>Les données des salariés sont-elles protégées ?<span class="pl"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg></span></summary><p class="ans">Oui. Elles sont hébergées en France, chiffrées, cloisonnées par client et accessibles depuis le seul compte rattaché au dossier. Les traitements sont documentés dans le cadre du RGPD.</p></details>
       <details><summary>Mon cabinet externalise sa paie. Puis-je utiliser EmployiZ ?<span class="pl"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg></span></summary><p class="ans">EmployiZ part des fichiers DSN, pas du logiciel qui les produit. Si votre prestataire vous transmet les déclarations de vos clients, vous pouvez les déposer. Nous vérifions votre cas précis lors de la démonstration.</p></details>
       <details><summary>Quels indicateurs sont disponibles ?<span class="pl"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg></span></summary><p class="ans">Effectifs et structure (CDI, CDD, alternants, temps plein et partiel, âges), masse salariale et rémunérations par catégorie et par sexe, absentéisme, turnover, égalité professionnelle, santé et sécurité, couvertures santé et prévoyance avec le Signal leZèbre, et comparaison dans le temps.</p></details>
+      <details><summary>Combien de temps pour démarrer ?<span class="pl"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg></span></summary><p class="ans">Un premier dossier se raccorde à partir de vos fichiers DSN existants, sans développement de votre côté. Le calendrier dépend du nombre de dossiers à reprendre : nous le cadrons ensemble lors de la démonstration.</p></details>
       <details><summary>EmployiZ remplace-t-il un SIRH ?<span class="pl"><svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg></span></summary><p class="ans">Non, il le complète. Un SIRH gère des processus ; EmployiZ lit et met en perspective la donnée déclarée. Ce n'est ni un logiciel de paie, ni un outil de recrutement.</p></details>
     </div>
   </div>
@@ -972,7 +813,7 @@ footer::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;backgrou
   <svg class="bigz" viewBox="0 0 84 100" aria-hidden="true"><defs><linearGradient id="zfade" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" stop-color="#C6FF2E" stop-opacity="0"/><stop offset=".55" stop-color="#C6FF2E" stop-opacity=".55"/><stop offset="1" stop-color="#C6FF2E"/></linearGradient></defs><use href="#z"/></svg>
   <div class="wrap final-g">
     <div class="rv">
-      <div class="idx"><span class="n">08</span>Démonstration</div>
+      <div class="idx"><span class="n">07</span>Démonstration</div>
       <h2 class="h2" id="t-demo">Et si vos DSN devenaient votre meilleur outil de conseil ?</h2>
       <p class="lead">Trente minutes, un dossier représentatif de votre activité, vos questions. Nous vous montrons EmployiZ en conditions réelles et nous précisons son périmètre exact.</p>
     </div>
@@ -1000,7 +841,7 @@ footer::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;backgrou
         <div class="lock"><span class="wm">Employi<svg class="z" viewBox="0 0 84 100" aria-hidden="true"><use href="#z"/></svg></span><span class="byz">by leZèbre</span></div>
         <div class="by">Une solution éditée par <img src="assets/lezebre-tech-logo-inverse.png" alt="leZèbre Tech" width="109" height="30"></div>
       </div>
-      <div><h4>Produit</h4><ul><li><a href="#solution">La solution</a></li><li><a href="#fonctionnalites">Fonctionnalités</a></li><li><a href="#fonctionnement">Comment ça marche</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+      <div><h4>Produit</h4><ul><li><a href="#solution">La solution</a></li><li><a href="#fonctionnalites">Fonctionnalités</a></li><li><a href="#securite">Sécurité</a></li><li><a href="#faq">FAQ</a></li></ul></div>
       <div><h4 style="display:flex;align-items:center;gap:8px"><svg aria-hidden="true" style="width:18px;height:18px"><use href="#zb"/></svg>Groupe leZèbre</h4><ul><li><a href="https://lezebre.io">lezebre.io</a></li><li><a href="https://lezebre.io/experts-comptables">Experts-comptables</a></li><li><a href="https://lezebre.tech">leZèbre Tech</a></li></ul></div>
       <div><h4>Contact</h4><ul><li><a href="mailto:contact@lezebre.io">contact@lezebre.io</a></li><li><a href="#demo">Demander une démo</a></li><li><a href="#" data-todo>Mentions légales</a></li><li><a href="#" data-todo>Politique de confidentialité</a></li></ul></div>
     </div>
@@ -1305,9 +1146,12 @@ function stackScroll() {
 function stackSetup() { pillars.classList.toggle('stack', stackFits()); if (!pillars.classList.contains('stack')) pills.forEach(c => { c.style.removeProperty('--s'); c.style.removeProperty('--o'); }); stackScroll(); }
 stackSetup();
 
-/* ---------- 07 Étapes ---------- */
-new IntersectionObserver((e, o) => e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('played'); o.unobserve(x.target); } }), { threshold: .35 }).observe($('#how'));
-if (reduce) $('#how').classList.add('played');
+/* ---------- Titre en mots (section cabinets) ---------- */
+$$('.words').forEach(h => {
+  let k = 0;
+  const wrap = n => { if (n.nodeType === 3) { const f = document.createDocumentFragment(); n.textContent.split(/(\s+)/).forEach(t => { if (!t) return; if (/^\s+$/.test(t)) f.append(t); else { const w = document.createElement('span'); w.className = 'w'; w.innerHTML = `<span style="--k:${k++}">${t}</span>`; f.append(w); } }); n.replaceWith(f); } else [...n.childNodes].forEach(wrap); };
+  [...h.childNodes].forEach(wrap); h.classList.add('rv');
+});
 
 /* ---------- Révélations ---------- */
 const rvIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rvIO.unobserve(e.target); } }), { threshold: .12, rootMargin: '0px 0px -6% 0px' });

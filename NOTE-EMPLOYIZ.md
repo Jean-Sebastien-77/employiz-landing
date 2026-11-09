@@ -67,3 +67,14 @@ Reprise de la grammaire de lezebre.io : un grand aplat en dégradé, un seul coi
 - Cartes Visualisez, Comprenez, Conseillez empilées au défilement : chaque carte se cale en haut et la suivante glisse par-dessus, la précédente recule légèrement. Sur mobile, ou si une carte ne tient pas dans la hauteur de l'écran, elles restent en liste simple pour ne rien couper.
 - Bloc « Le produit existe, voici ses écrans » supprimé ; les captures restent dans `assets/` mais ne sont plus affichées dans la V3.
 - Numérotation des sections rendue continue (02 à 08).
+
+### V3, travail de rythme
+
+- Conservés intacts : hero, révélation DSN → Z, cartes empilées, fonctionnalités à onglets.
+- Pour les cabinets : composition éditoriale, sans tableau de bord. Grand titre révélé mot à mot (« bulletins de paie » en retrait), texte et appel à démo collants à gauche, quatre bénéfices numérotés à droite avec filets qui se tracent.
+- Supprimés : vision portefeuille (« Tous vos clients. Une seule vision. »), « Comment ça marche », toute mention de feuille de route (y compris dans by leZèbre).
+- Infos pratiques déplacées dans la FAQ : dépôt des fichiers depuis l'application, nouvelle question « Combien de temps pour démarrer ? ».
+- Sécurité condensée sur fond clair (titre, une phrase RGPD, cinq lignes), enchaînée avec la FAQ.
+- Alternance des fonds : sombre, sombre, clair, clair, sombre, sombre, clair, clair, sombre. Raccord bleu nuit continu entre cabinets et by leZèbre.
+- Navigation : « Comment ça marche » remplacé par « leZèbre » ; numérotation 02 à 07.
+- Logo du tableau de bord : Z citron cerné d'encre.
