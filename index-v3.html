@@ -9,12 +9,12 @@
 <meta property="og:description" content="Le pilotage social à partir de vos déclarations. Effectifs, masse salariale, absentéisme, couvertures santé et prévoyance. Par leZèbre Tech.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#010727">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000F57'/%3E%3Cpath transform='translate(8.4 7) scale(.18)' d='M0 0H84V19L31 81H84V100H0V81L53 19H0Z' fill='%23C6FF2E'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill='%23C6FF2E' d='M10 0H22A18 18 0 0 1 40 18V30A10 10 0 0 1 30 40H10A10 10 0 0 1 0 30V10A10 10 0 0 1 10 0Z'/%3E%3Cg fill='%23020B47'%3E%3Ccircle cx='26' cy='13.6' r='4.2' opacity='.42'/%3E%3Cpath opacity='.42' d='M18.5 30.5c0-5 3.4-8.6 7.5-8.6s7.5 3.6 7.5 8.6z'/%3E%3Cg stroke='%23C6FF2E' stroke-width='2.4' paint-order='stroke'%3E%3Ccircle cx='16' cy='15' r='5'/%3E%3Cpath d='M6.5 31c0-5.8 4.2-9.8 9.5-9.8s9.5 4 9.5 9.8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..900&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Zeboard","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Logiciel de pilotage social et d'analyse DSN : tableaux de bord RH, masse salariale, absentéisme, turnover et couvertures santé et prévoyance, pour les experts-comptables et les entreprises.","publisher":{"@type":"Organization","name":"leZèbre Tech","url":"https://lezebre.tech"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Zeboard","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Logiciel de pilotage social et d'analyse DSN : tableaux de bord RH, masse salariale, absentéisme, turnover et couvertures santé et prévoyance, pour les experts-comptables et les entreprises.","offers":[{"@type":"Offer","name":"Jusqu'à 25 entreprises","priceCurrency":"EUR","price":99,"priceSpecification":{"@type":"UnitPriceSpecification","price":99,"priceCurrency":"EUR","valueAddedTaxIncluded":false,"billingDuration":"P1M"}},{"@type":"Offer","name":"Jusqu'à 100 entreprises","priceCurrency":"EUR","price":250,"priceSpecification":{"@type":"UnitPriceSpecification","price":250,"priceCurrency":"EUR","valueAddedTaxIncluded":false,"billingDuration":"P1M"}}],"publisher":{"@type":"Organization","name":"leZèbre Tech","url":"https://lezebre.tech"}}
 </script>
 <style>
 :root{
@@ -51,6 +51,7 @@ h1,h2,h3,h4,p{margin:0}
 /* ---------- Marque ---------- */
 .wm{display:inline-flex;align-items:baseline;font-weight:700;letter-spacing:-.045em;line-height:1;white-space:nowrap}
 .wm .z{height:.715em;width:auto;margin-right:.02em;fill:var(--zest);align-self:baseline;transform:translateY(0)}
+.wm .pic{flex:none;height:1.12em;width:1.12em;margin-right:.3em;align-self:baseline;transform:translateY(.2em)}
 .zmark{fill:var(--zest)}
 
 /* ---------- Boutons ---------- */
@@ -397,6 +398,25 @@ section{position:relative}
 .trust svg{width:22px;height:22px;align-self:center;fill:none;stroke:var(--txt);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .trust b{font-size:16.5px;font-weight:600;letter-spacing:-.015em}
 .trust span{font-size:15.5px;color:var(--mute)}
+/* Tarifs */
+.price-s{padding:clamp(88px,10vw,150px) 0}
+.price-head{max-width:780px}
+.plans{list-style:none;margin:clamp(48px,5vw,76px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.plan{position:relative;display:flex;flex-direction:column;padding:34px 30px 30px;border-radius:20px 64px 20px 20px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px var(--line-d)}
+.pl-n{font-size:17px;font-weight:600;letter-spacing:-.015em}
+.pl-p{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;margin-top:30px}
+.amt{font-size:clamp(54px,5.4vw,78px);font-weight:600;letter-spacing:-.055em;line-height:.9;white-space:nowrap}
+.amt.sm{font-size:clamp(42px,4.2vw,60px);letter-spacing:-.05em}
+.per{font-size:15px;color:var(--mute-d)}
+.pl-u{font-size:15px;line-height:1.5;color:var(--mute-d);margin:16px 0 34px}
+.plan .btn{margin-top:auto;width:100%}
+.plan.hi{background:linear-gradient(165deg,#E6FF94 0%,#D4FF5C 35%,#C6FF2E 65%,#A6EB00 100%);color:var(--ink);box-shadow:0 34px 80px -36px rgba(198,255,46,.55)}
+.plan.hi .per,.plan.hi .pl-u{color:rgba(2,11,71,.74)}
+.plan.hi :focus-visible{outline-color:var(--ink)}
+.pl-tag{position:absolute;top:-13px;left:28px;display:inline-flex;align-items:center;height:26px;padding:0 12px;border-radius:999px;background:var(--ink);color:var(--zest);font-size:12.5px;font-weight:600;box-shadow:inset 0 0 0 1px rgba(198,255,46,.4)}
+.pl-inc{display:flex;align-items:baseline;gap:10px;margin-top:30px;font-size:15px;color:var(--mute-d)}
+.pl-inc::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--zest);transform:translateY(-1px)}
+@media (max-width:900px){.plans{grid-template-columns:minmax(0,1fr);max-width:540px;gap:28px}}
 .faq-s{padding-top:clamp(64px,8vw,112px);border-top:1px solid var(--line)}
 
 /* ---------- 05 by leZèbre ---------- */
@@ -530,6 +550,9 @@ footer::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;backgrou
 
 <!-- Glyphe Z partagé : dessiné, pas tiré d'une police -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- Picto RH : deux personnes sur l'aplat citron à grand coin arrondi -->
+  <linearGradient id="picg" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#E6FF94"/><stop offset=".45" stop-color="#C6FF2E"/><stop offset="1" stop-color="#A6EB00"/></linearGradient>
+  <symbol id="pic" viewBox="0 0 40 40"><path fill="url(#picg)" d="M10 0H22A18 18 0 0 1 40 18V30A10 10 0 0 1 30 40H10A10 10 0 0 1 0 30V10A10 10 0 0 1 10 0Z"/><g fill="#020B47"><circle cx="26" cy="13.6" r="4.2" opacity=".42"/><path opacity=".42" d="M18.5 30.5c0-5 3.4-8.6 7.5-8.6s7.5 3.6 7.5 8.6z"/><g stroke="url(#picg)" stroke-width="2.4" paint-order="stroke"><circle cx="16" cy="15" r="5"/><path d="M6.5 31c0-5.8 4.2-9.8 9.5-9.8s9.5 4 9.5 9.8z"/></g></g></symbol>
   <symbol id="z" viewBox="0 0 84 100"><path d="M0 0H84V19L31 81H84V100H0V81L53 19H0Z"/></symbol>
   <defs><linearGradient id="lzgrad" x1="1.028" y1="-0.558" x2="0.718" y2="0.803" gradientUnits="objectBoundingBox">
       <stop offset="0" stop-color="#de1d27"/>
@@ -552,13 +575,14 @@ footer::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;backgrou
 <header class="nav" id="nav">
   <div class="wrap nav-in">
     <a class="brand" href="#top" aria-label="Zeboard, accueil">
-      <span class="wm" role="img" aria-label="Zeboard"><svg class="z" viewBox="0 0 84 100" aria-hidden="true"><use href="#z"/></svg>eboard</span>
+      <span class="wm" role="img" aria-label="Zeboard"><svg class="pic" viewBox="0 0 40 40" aria-hidden="true"><use href="#pic"/></svg><svg class="z" viewBox="0 0 84 100" aria-hidden="true"><use href="#z"/></svg>eboard</span>
     </a>
     <nav class="nav-links" aria-label="Navigation principale">
       <a href="#solution">La solution</a>
       <a href="#fonctionnalites">Fonctionnalités</a>
       <a href="#cabinets">Pour les cabinets</a>
       <a href="#lezebre">leZèbre</a>
+      <a href="#tarifs">Tarifs</a>
     </nav>
     <a class="btn btn-z" href="#demo">Demander une démo</a>
     <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sheet"><span></span></button>
@@ -568,6 +592,7 @@ footer::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;backgrou
     <a href="#fonctionnalites">Fonctionnalités</a>
     <a href="#cabinets">Pour les cabinets</a>
     <a href="#lezebre">leZèbre</a>
+    <a href="#tarifs">Tarifs</a>
     <a class="btn btn-z" href="#demo">Demander une démo</a>
   </div>
 </header>
@@ -788,6 +813,39 @@ footer::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;backgrou
   </div>
 </section>
 
+<!-- 07 TARIFS -->
+<section class="sec night price-s" id="tarifs" aria-labelledby="t-price">
+  <div class="wrap">
+    <div class="price-head rv">
+      <div class="idx"><span class="n">07</span>Tarifs</div>
+      <h2 class="h2" id="t-price">Un abonnement à la taille de votre portefeuille.</h2>
+      <p class="lead">Le prix dépend du nombre d'entreprises que vous suivez dans Zeboard. Abonnement mensuel, prix hors taxes.</p>
+    </div>
+    <ul class="plans">
+      <li class="plan rv">
+        <h3 class="pl-n">Jusqu'à 25 entreprises</h3>
+        <p class="pl-p"><span class="amt">99&nbsp;€</span><span class="per">HT / mois</span></p>
+        <p class="pl-u">Soit 3,96&nbsp;€ HT par entreprise et par mois.</p>
+        <a class="btn btn-ghost" href="#demo">Demander une démo</a>
+      </li>
+      <li class="plan hi rv" style="--d:.08s">
+        <span class="pl-tag">Meilleur prix par entreprise</span>
+        <h3 class="pl-n">Jusqu'à 100 entreprises</h3>
+        <p class="pl-p"><span class="amt">250&nbsp;€</span><span class="per">HT / mois</span></p>
+        <p class="pl-u">Soit 2,50&nbsp;€ HT par entreprise et par mois.</p>
+        <a class="btn btn-ink" href="#demo">Demander une démo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+      </li>
+      <li class="plan rv" style="--d:.16s">
+        <h3 class="pl-n">Au-delà de 100 entreprises</h3>
+        <p class="pl-p"><span class="amt sm">Sur mesure</span></p>
+        <p class="pl-u">Un tarif construit avec vous, selon le volume de votre portefeuille.</p>
+        <a class="btn btn-ghost" href="#demo">Nous consulter</a>
+      </li>
+    </ul>
+    <p class="pl-inc rv">Dans chaque formule : dépôt de vos DSN, tableaux de bord par entreprise, Signal leZèbre et hébergement en France.</p>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="light sec faq-s" id="faq" aria-labelledby="t-faq">
   <div class="wrap faq">
@@ -808,12 +866,12 @@ footer::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;backgrou
   </div>
 </section>
 
-<!-- 09 CONVERSION FINALE -->
+<!-- 08 CONVERSION FINALE -->
 <section class="sec final" id="demo" aria-labelledby="t-demo">
   <svg class="bigz" viewBox="0 0 84 100" aria-hidden="true"><defs><linearGradient id="zfade" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" stop-color="#C6FF2E" stop-opacity="0"/><stop offset=".55" stop-color="#C6FF2E" stop-opacity=".55"/><stop offset="1" stop-color="#C6FF2E"/></linearGradient></defs><use href="#z"/></svg>
   <div class="wrap final-g">
     <div class="rv">
-      <div class="idx"><span class="n">07</span>Démonstration</div>
+      <div class="idx"><span class="n">08</span>Démonstration</div>
       <h2 class="h2" id="t-demo">Et si vos DSN devenaient votre meilleur outil de conseil ?</h2>
       <p class="lead">Trente minutes, un dossier représentatif de votre activité, vos questions. Nous vous montrons Zeboard en conditions réelles et nous précisons son périmètre exact.</p>
     </div>
@@ -838,10 +896,10 @@ footer::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;backgrou
   <div class="wrap">
     <div class="foot">
       <div>
-        <div class="lock"><span class="wm" role="img" aria-label="Zeboard"><svg class="z" viewBox="0 0 84 100" aria-hidden="true"><use href="#z"/></svg>eboard</span><span class="byz">by leZèbre</span></div>
+        <div class="lock"><span class="wm" role="img" aria-label="Zeboard"><svg class="pic" viewBox="0 0 40 40" aria-hidden="true"><use href="#pic"/></svg><svg class="z" viewBox="0 0 84 100" aria-hidden="true"><use href="#z"/></svg>eboard</span><span class="byz">by leZèbre</span></div>
         <div class="by">Une solution éditée par <img src="assets/lezebre-tech-logo-inverse.png" alt="leZèbre Tech" width="109" height="30"></div>
       </div>
-      <div><h4>Produit</h4><ul><li><a href="#solution">La solution</a></li><li><a href="#fonctionnalites">Fonctionnalités</a></li><li><a href="#securite">Sécurité</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+      <div><h4>Produit</h4><ul><li><a href="#solution">La solution</a></li><li><a href="#fonctionnalites">Fonctionnalités</a></li><li><a href="#securite">Sécurité</a></li><li><a href="#tarifs">Tarifs</a></li><li><a href="#faq">FAQ</a></li></ul></div>
       <div><h4 style="display:flex;align-items:center;gap:8px"><svg aria-hidden="true" style="width:18px;height:18px"><use href="#zb"/></svg>Groupe leZèbre</h4><ul><li><a href="https://lezebre.io">lezebre.io</a></li><li><a href="https://lezebre.io/experts-comptables">Experts-comptables</a></li><li><a href="https://lezebre.tech">leZèbre Tech</a></li></ul></div>
       <div><h4>Contact</h4><ul><li><a href="mailto:contact@lezebre.io">contact@lezebre.io</a></li><li><a href="#demo">Demander une démo</a></li><li><a href="#" data-todo>Mentions légales</a></li><li><a href="#" data-todo>Politique de confidentialité</a></li></ul></div>
     </div>
@@ -889,7 +947,7 @@ const I = {
 const NAV = [['Accueil','grid','accueil'],['Effectifs','users','effectifs'],['Masse salariale','euro','masse'],['Détail salariés','doc'],['Absentéisme','cal','absences'],['Turnover','swap'],['Égalité professionnelle','scale','egalite'],['Santé & Sécurité','heart'],['Couvertures','shield','couvertures'],['Évolutions','trend'],['Alertes','alert']];
 const ico = k => `<svg viewBox="0 0 16 16" aria-hidden="true">${I[k]}</svg>`;
 const chev = '<svg viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3"/></svg>';
-const ZW = cls => `<span class="wm" role="img" aria-label="Zeboard"><svg class="z" viewBox="0 0 84 100"><use href="#z"/></svg>eboard</span>`;
+const ZW = cls => `<span class="wm" role="img" aria-label="Zeboard"><svg class="pic" viewBox="0 0 40 40" aria-hidden="true"><use href="#pic"/></svg><svg class="z" viewBox="0 0 84 100"><use href="#z"/></svg>eboard</span>`;
 
 /* ---------- Graphiques (SVG mesurés à la largeur réelle) ---------- */
 let gid = 0;

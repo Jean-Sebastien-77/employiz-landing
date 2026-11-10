@@ -85,3 +85,13 @@ Reprise de la grammaire de lezebre.io : un grand aplat en dégradé, un seul coi
 - Logotype : le Z citron passe en tête du mot (Z dessiné + « eboard »). Il ouvre désormais le nom au lieu de le conclure, ce qui renforce l'écho avec le Z de leZèbre. Nom lisible par les lecteurs d'écran (« Zeboard »).
 - Inchangés : le nom du dossier `employiz/`, le dépôt GitHub `employiz-landing` et le nom de ce fichier.
 - À valider : antériorité INPI / EUIPO et domaines pour Zeboard.
+
+## V3 : picto RH et tarifs (2026-11-10)
+
+- **Picto RH** devant le nom, partout où le logotype apparaît (navigation, tableau de bord, pied de page) et en favicon : deux personnes bleu nuit sur un aplat citron à grand coin arrondi en haut à droite, la même forme que les aplats de la V3.
+- **Section 07 Tarifs** sur fond bleu nuit, entre sécurité et FAQ (démonstration renumérotée 08), lien « Tarifs » dans la navigation et le pied de page :
+  - jusqu'à 25 entreprises : 99 € HT par mois, soit 3,96 € par entreprise ;
+  - jusqu'à 100 entreprises : 250 € HT par mois, soit 2,50 € par entreprise, carte mise en avant (aplat citron, pastille « Meilleur prix par entreprise », un fait arithmétique, pas un « plus choisi » inventé) ;
+  - au-delà de 100 : sur mesure, « Nous consulter ».
+- Les deux premiers tarifs sont aussi déclarés dans le JSON-LD (offres mensuelles hors taxes).
+- À valider : « jusqu'à » 25 et 100 entreprises (lecture des paliers), et la ligne « Dans chaque formule : dépôt de vos DSN, tableaux de bord par entreprise, Signal leZèbre et hébergement en France » (périmètre identique dans toutes les formules supposé). Engagement, facturation annuelle et essai gratuit non mentionnés faute d'information.
