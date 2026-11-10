@@ -1,10 +1,10 @@
-# EmployiZ · Note de création
+# Zeboard · Note de création
 
 Maquette : `employiz/index.html` (fichier unique, sans dépendance, captures produit dans `employiz/assets/`).
 
 ## 1. Concept : « Rendre visible l'invisible », le Z comme chemin de la donnée
 
-Le Z n'est pas un ornement : c'est le trajet de la donnée. Barre du haut = la DSN brute, diagonale = la lecture par EmployiZ, barre du bas = des indicateurs lisibles. Ce trajet est mis en scène une seule fois, en grand, dans la section 02 : six blocs réels de la DSN (S21.G00.30 Individu, .40 Contrat, .51 Rémunération, .60 Arrêt de travail, .62 Fin du contrat, .70 Affiliation prévoyance) sont lus un par un pendant que le Z se trace et que les indicateurs correspondants s'allument.
+Le Z n'est pas un ornement : c'est le trajet de la donnée. Barre du haut = la DSN brute, diagonale = la lecture par Zeboard, barre du bas = des indicateurs lisibles. Ce trajet est mis en scène une seule fois, en grand, dans la section 02 : six blocs réels de la DSN (S21.G00.30 Individu, .40 Contrat, .51 Rémunération, .60 Arrêt de travail, .62 Fin du contrat, .70 Affiliation prévoyance) sont lus un par un pendant que le Z se trace et que les indicateurs correspondants s'allument.
 
 ## 2. Choix de design
 
@@ -29,14 +29,14 @@ Glyphe dessiné (pas un caractère de police), identique partout, aussi lourd qu
 
 ## 5. À valider avant mise en production
 
-1. **Nom EmployiZ** : antériorité INPI / EUIPO et noms de domaine (aucun domaine n'est cité dans la page).
+1. **Nom Zeboard** : antériorité INPI / EUIPO et noms de domaine (aucun domaine n'est cité dans la page).
 2. **Vue consolidée cabinet (Master KPI)** : lezebre.tech la classe dans les « prochaines étapes ». La section 06 est donc étiquetée « Feuille de route » et « Aperçu conceptuel, non disponible à ce jour ». À retirer ou à basculer si la fonction sort.
 3. **« 100 indicateurs »** : non repris, introuvable sur le site actuel. À confirmer avant de l'afficher.
 4. **Exports, partage, automatisation des dépôts** : annoncés à la feuille de route par lezebre.tech, donc non présentés comme disponibles.
 5. **Sécurité** : formulations reprises du site actuel (France, chiffrement, cloisonnement, accès tracés, RGPD, sous-traitant). La phrase « le cabinet ou l'entreprise reste maître de ses données » découle du statut de sous-traitant : à faire relire par le DPO.
 6. **FAQ « paie externalisée »** : réponse prudente (dépôt des fichiers transmis par le prestataire). À confirmer.
 7. **Indicateurs affichés en maquette** : âge moyen, part variable, ancienneté moyenne, temps partiel. Tous dérivables de la DSN, mais à vérifier qu'ils sont bien calculés par l'application.
-8. **Captures** : celles du site actuel portent la marque RH BI / leZèbre Tech et sont en basse définition. Prévoir de nouvelles captures HD une fois l'interface habillée EmployiZ.
+8. **Captures** : celles du site actuel portent la marque RH BI / leZèbre Tech et sont en basse définition. Prévoir de nouvelles captures HD une fois l'interface habillée Zeboard.
 9. **Formulaire** : à brancher (CRM, email) ; mentions légales et politique de confidentialité à lier.
 10. **Polices** : chargées depuis Google Fonts ; à auto-héberger en production.
 
@@ -51,8 +51,8 @@ Glyphe dessiné (pas un caractère de police), identique partout, aussi lourd qu
 
 ### V2, ajustements
 
-- Navigation : EmployiZ seul (le trio citron, rose, blanc en haut de page est retiré).
-- « by leZèbre » en texte sobre : signature « EmployiZ by leZèbre » dans le pied de page, et surtitre « 08 by leZèbre » de la section éditeur.
+- Navigation : Zeboard seul (le trio citron, rose, blanc en haut de page est retiré).
+- « by leZèbre » en texte sobre : signature « Zeboard by leZèbre » dans le pied de page, et surtitre « 08 by leZèbre » de la section éditeur.
 - Dégradé vers le citron : un halo citron en fond vire au vert-de-gris sur le bleu nuit, il est donc abandonné. Le dégradé est porté par le Z géant de la conclusion (bleu nuit vers citron) et par le filet citron en haut du pied de page. Les fonds restent bleu nuit purs ; le halo violet du hero est supprimé.
 
 ## V3 (`index-v3.html`) : la forme leZèbre
@@ -78,3 +78,10 @@ Reprise de la grammaire de lezebre.io : un grand aplat en dégradé, un seul coi
 - Alternance des fonds : sombre, sombre, clair, clair, sombre, sombre, clair, clair, sombre. Raccord bleu nuit continu entre cabinets et by leZèbre.
 - Navigation : « Comment ça marche » remplacé par « leZèbre » ; numérotation 02 à 07.
 - Logo du tableau de bord : Z citron cerné d'encre.
+
+## Changement de nom : Zeboard (2026-11-10)
+
+- EmployiZ devient **Zeboard** dans les trois versions (titres, métadonnées, JSON-LD, textes, FAQ, mentions légales).
+- Logotype : le Z citron passe en tête du mot (Z dessiné + « eboard »). Il ouvre désormais le nom au lieu de le conclure, ce qui renforce l'écho avec le Z de leZèbre. Nom lisible par les lecteurs d'écran (« Zeboard »).
+- Inchangés : le nom du dossier `employiz/`, le dépôt GitHub `employiz-landing` et le nom de ce fichier.
+- À valider : antériorité INPI / EUIPO et domaines pour Zeboard.
